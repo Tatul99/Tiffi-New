@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="66" height="66" viewBox="0 0 66 66">
+  <g id="кнопка-лево" transform="translate(-344 -715)">
+    <g id="Эллипс_3" data-name="Эллипс 3" transform="translate(344 715)" fill="none" stroke="#000" stroke-width="2">
+      <circle cx="33" cy="33" r="33" stroke="none"/>
+      <circle cx="33" cy="33" r="32" fill="none"/>
+    </g>
+    <path id="Icon_ionic-ios-arrow-round-forward" data-name="Icon ionic-ios-arrow-round-forward" d="M28.688,11.668a1.481,1.481,0,0,0-.011,2.086l6.892,6.9H9.337a1.474,1.474,0,0,0,0,2.947h26.22l-6.892,6.9a1.492,1.492,0,0,0,.011,2.086,1.468,1.468,0,0,0,2.074-.011l9.341-9.409h0a1.655,1.655,0,0,0,.306-.465,1.406,1.406,0,0,0,.113-.567,1.478,1.478,0,0,0-.419-1.032L30.751,11.7A1.444,1.444,0,0,0,28.688,11.668Z" transform="translate(401.193 770.135) rotate(-180)"/>
+  </g>
+</svg>
