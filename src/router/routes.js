@@ -17,6 +17,13 @@ const routes = [
       layout: "main-layout",
     },
   },
+  {
+    path: "/Aboute",
+    component: () => import("../pages/Aboute.vue"),
+    meta: {
+      layout: "main-layout",
+    },
+  },
 ];
 
 export default routes;

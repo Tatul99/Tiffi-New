@@ -132,7 +132,7 @@ let menuTitles = [
   margin-top: 124px;
 }
 .line {
-  width: 596px;
+  width: 37%;
   height: 2px;
 
   background-color: #fff;
