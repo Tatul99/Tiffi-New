@@ -9,15 +9,16 @@
     @click="GoToTop()"
     v-if="cuycTalVerevTanoxButton"
   >
-    <!-- <div class="icon"></div> -->
   </a>
 </template>
 
 <script setup>
+import { onMounted, ref } from "vue";
 import Menu from "./leyaout-component/menu.vue";
 import Footer from "./leyaout-component/fotter.vue";
-import { onMounted, ref } from "vue";
-console.log(Menu);
+
+// console.log(Menu.value);
+// console.log(Footer.value);
 onMounted(() => {
   window.addEventListener("scroll", handleScroll);
 });
