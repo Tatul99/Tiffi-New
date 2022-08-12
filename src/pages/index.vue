@@ -1,11 +1,36 @@
 <template>
   <div>
     <spring-colection />
+    <div v-if="compilationArr.length">
+      <compilation :slideArr="compilationArr" :obj="obj2" />
+    </div>
   </div>
 </template>
 
 <script setup>
 import SpringColection from "../indexComponent/SpringColection.vue";
+import { useStore } from "vuex";
+import { ref, computed } from "vue";
+import axios from "axios";
+import { HOST } from "../providers";
+import Compilation from "../components/compilation.vue";
+import { onMounted } from "@vue/runtime-core";
+let store = useStore();
+const obj2 = { text: "Подборка" };
+let compilationArr = ref([]);
+// console.log(HOST);
+let url = HOST;
+onMounted(() => {
+  zapros();
+});
+
+// console.log(store);
+async function zapros() {
+  const response = await axios.get(url + "/api/app/collection");
+  // console.log(response.data.data);
+  compilationArr.value = response.data.data.items;
+  // console.log(compilationArr.value);
+}
 </script>
 
 <style scoped>
