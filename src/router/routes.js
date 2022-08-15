@@ -31,6 +31,13 @@ const routes = [
       layout: "main-layout",
     },
   },
+  {
+    path: "/ForMan",
+    component: () => import("../pages/ForMan.vue"),
+    meta: {
+      layout: "main-layout",
+    },
+  },
 ];
 
 export default routes;
