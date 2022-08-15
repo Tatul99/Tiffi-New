@@ -186,16 +186,20 @@ a {
   .q-carousel__slides-container {
     height: 950px;
   }
+  .items {
+    width: 300px !important;
+    height: 400px !important;
+  }
   .vueperslide--active {
     width: 495px !important;
     height: 573px !important;
   }
   .vueperslides__arrow--prev {
-    top: 744px !important;
+    top: 604px !important;
     left: 80% !important;
   }
   .vueperslides__arrow--next {
-    top: 744px !important;
+    top: 604px !important;
     right: 20px !important;
   }
   .photo-slider .q-panel-parent {

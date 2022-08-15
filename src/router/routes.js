@@ -24,6 +24,13 @@ const routes = [
       layout: "main-layout",
     },
   },
+  {
+    path: "/ForWoman",
+    component: () => import("../pages/ForWomanPage.vue"),
+    meta: {
+      layout: "main-layout",
+    },
+  },
 ];
 
 export default routes;

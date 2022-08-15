@@ -1,25 +1,35 @@
 <template>
-  <!-- <div v-for="item in filtrArr" :key="item.id">
-    <slider-component :arr="item" />
-  </div> -->
-
-  <div class="col-11 main-slider">
-    <div class="row justify-center">
-      <div class="col-11">
-        <div class="row justify-end items-center">
-          <div class="col-11 col-md-8">
-            <div class="row justify-between">
-              <div class="big-title row items-center">Подборка</div>
-              <div class="time row items-center col-4">
-                <div class="day col-8 col-md-6">{{ today }}/</div>
-                <div class="mounth col-4 col-md-6">{{ mun }}</div>
+  <div class="col-12 col-md-10 q-mt-xl main-slider">
+    <div>
+      <div class="col">
+        <div class="row justify-start slider-title q-ml-md">
+          <div class="col-10">
+            <div class="row">
+              <div
+                v-if="obj.miniTitle"
+                class="row items-center mini-title text-weight-bolder q-pr-md"
+              >
+                {{ obj.miniTitle }}
               </div>
+              <div v-if="obj.title" class="col-6 title text-weight-bolder">
+                {{ obj.title }}
+              </div>
+              <img :src="obj.img" alt="" />
             </div>
+            <!-- <router-link @click="pushpath" to="/brand"> -->
+            <router-link :to="path"
+              ><div v-if="path !== '/cloaths-info/'" class="row">
+                <div class="seeMore q-pr-md">Увидеть Больше</div>
+                <img
+                  src="../../public/forMan/left-vector.svg"
+                  class="cursor-pointer seeMoreIcon"
+                  alt=""
+                /></div
+            ></router-link>
+            <!-- </router-link> -->
           </div>
         </div>
       </div>
-    </div>
-    <div class="">
       <q-carousel
         v-model="slide"
         transition-prev="slide-right"
@@ -33,8 +43,8 @@
         class="bg-grey-1 shadow-2 rounded-borders carusel"
       >
         <q-carousel-slide
-          v-for="(item, i) in filtrArr"
-          :key="`item${item.id}`"
+          v-for="(item, i) in arr"
+          :key="item"
           :name="i + 1"
           class="column no-wrap"
         >
@@ -42,6 +52,14 @@
             class="row fit justify-start items-center q-gutter-xs q-col-gutter no-wrap slider-div"
           >
             <slider-component :arr="item" />
+            <!-- <q-img
+            v-for="info in item"
+            :key="info"
+            class="rounded-borders col-3 full-height"
+            :src="info.image"
+          ></q-img> -->
+            <!-- <div class="text">{{ info.text }}</div>
+          <div class="pr">{{ info.prise }}</div> -->
           </div>
         </q-carousel-slide>
 
@@ -69,14 +87,14 @@
             <q-btn
               push
               round
-              :disable="activeBtn === filtrArr.length - 1"
+              :disable="activeBtn === arr.length - 1"
               text-color="black"
               @click="$refs.carousel.next(), activeBtn++"
             >
               <q-avatar size="66px">
                 <img
                   :src="
-                    activeBtn === filtrArr.length - 1
+                    activeBtn === arr.length - 1
                       ? './index/left.svg'
                       : './index/left-black.svg'
                   "
@@ -91,20 +109,21 @@
 </template>
 <script setup>
 import { onMounted, onUnmounted, ref } from "vue";
-import { date } from "quasar";
 import SliderComponent from "./slider-component.vue";
 const props = defineProps({
-  slideArr: Object,
+  slideArr: Array,
   obj: Object,
 });
-let slideToShow = 4;
+
 let width = document.documentElement.clientWidth;
+let slideToShow = 3;
+let arr = ref([]);
+let path = "";
+let activeBtn = 0;
+let slide = ref(1);
 onMounted(() => {
-  // console.log(props.slideArr);
   window.addEventListener("resize", getDimensions());
-  if (props.slideArr.length) {
-    foo();
-  }
+  foo();
 });
 onUnmounted(() => {
   window.addEventListener("resize", getDimensions());
@@ -112,58 +131,38 @@ onUnmounted(() => {
 function getDimensions() {
   width = document.documentElement.clientWidth;
 
-  if (window.innerWidth < 1041) slideToShow = 3;
-  if (window.innerWidth > 1040) slideToShow = 4;
-  if (window.innerWidth < 450) slideToShow = 2;
-  // if (window.innerWidth < 1040) this.slideToShow = 3;
-  // else if (window.innerWidth > 1040) this.slideToShow = 4;
+  //   console.log(window.innerWidth);
+  if (window.innerWidth <= 1000) slideToShow = 2;
+  if (window.innerWidth > 1000) slideToShow = 3;
+  // if (window.innerWidth < 1040) arrslideToShow = 3;
+  // else if (window.innerWidth > 1040) arrslideToShow = 4;
 
-  // if (this.width + 15 <= 500) this.slideToShow = 1;
+  // if (arrwidth + 15 <= 500) arrslideToShow = 1;
 }
-let filtrArr = ref([]);
-
 function foo() {
   let arr2 = [];
 
   if (props.slideArr.length) {
     for (let i = 0; i < props.slideArr.length; i++) {
       if (arr2.length == slideToShow) {
-        filtrArr.value.push(arr2);
+        arr.value.push(arr2);
         // console.log(arr2);
         arr2 = [];
       }
       arr2.push(props.slideArr[i]);
     }
   }
-  filtrArr.value.push(arr2);
+  arr.value.push(arr2);
   // console.log(arr);
 }
 
-const timeStamp = Date.now();
-const formattedString = date.formatDate(timeStamp, "YYYY-MM-DD");
-let activeBtn = 0;
-let slide = ref(1);
-const mounths = {
-  1: "янв",
-  2: "фев",
-  3: "мар",
-  4: "апр",
-  5: "мая",
-  6: " июня",
-  7: "июля",
-  8: " авг",
-  9: " сен",
-  10: "окт",
-  11: "ноя",
-  12: "дек",
-};
-let today = parseInt(formattedString.slice(8));
-let mun = mounths[parseInt(formattedString.slice(5, 7))];
-
-let path = "";
+console.log(arr.value);
 </script>
 
 <style scoped>
+.main-slider {
+  margin-top: 200px;
+}
 .btns {
   position: absolute;
   bottom: 0px;
@@ -175,7 +174,6 @@ let path = "";
 .arrow-btn {
   margin-right: 60px !important;
 }
-
 .mini-title {
   font-size: 40px;
 }
@@ -186,64 +184,38 @@ let path = "";
   font-size: 25px;
   text-decoration: none;
 }
-.day {
-  font-size: 90px;
-  font-weight: bold;
-}
-.mounth {
-  font-size: 35px;
-}
-.big-title {
-  font-size: 70px;
-  font-weight: bold;
-}
 /* .images {
   width: 30%;
   height: 30%;
 } */
-
 @media all and (max-width: 1024px) {
   .slider-div {
     justify-content: center;
   }
-  .prise {
-    font-size: 25px;
-  }
-  .text {
-    font-size: 24px;
+  .slider-title {
+    margin-left: 60px;
   }
 }
-@media all and (max-width: 450px) {
-  .big-title {
+@media all and (max-width: 455px) {
+  .mini-title {
+    font-size: 25px;
+  }
+  .title {
     font-size: 35px;
-    margin-bottom: 20px;
   }
-  .day {
-    font-size: 30px;
+  .seeMore {
+    font-size: 15px;
   }
-  .mounth {
-    font-size: 12px;
+  .slider-title {
+    margin-left: 20px;
   }
-  .main-slider {
-    height: 600px !important;
+  .seeMoreIcon {
+    width: 23px;
+    height: 15px;
   }
+
   .carusel {
-    height: 450px !important;
-  }
-  .slider-div {
-    align-items: flex-start;
-  }
-  /* img {
-    width: 48px;
-    height: 48px;
-  } */
-}
-@media all and (max-width: 360px) {
-  .big-title {
-    font-size: 25px;
-  }
-  .day {
-    font-size: 25px;
+    height: 600px !important;
   }
 }
 </style>
