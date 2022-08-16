@@ -129,14 +129,13 @@ function foo() {
     for (let i = 0; i < props.slideArr.length; i++) {
       if (arr2.length == slideToShow) {
         filtrArr.value.push(arr2);
-        // console.log(arr2);
+
         arr2 = [];
       }
       arr2.push(props.slideArr[i]);
     }
   }
   filtrArr.value.push(arr2);
-  // console.log(arr);
 }
 
 const timeStamp = Date.now();

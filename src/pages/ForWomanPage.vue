@@ -34,7 +34,6 @@
         <slider-main-component :obj="Bags" :slideArr="BagsArr" />
         <slider-main-component :obj="Bijouteri" :slideArr="BijouteriArr" />
       </div>
-      <!-- <slider-main-component :obj="Dior" :slideArr="DiorArr" /> -->
     </div>
   </div>
 </template>
@@ -47,7 +46,7 @@ onMounted(() => {
   zapros();
 });
 let url = HOST;
-// let ForWomenPageInfo = ref([]);
+
 let Clothing = {};
 let Shoes = {};
 let ShoesArr = ref([]);
@@ -78,43 +77,32 @@ async function zapros() {
     }
   }
   ardenverjacaczapros = 1;
-  console.log(response.data.data.items);
 }
-console.log(ardenverjacaczapros);
+
 function shouse(item) {
-  console.log(item);
   Shoes.id = item.category_id;
   Shoes.title = item.category_title;
 
   ShoesArr.value = item.products;
-  //   console.log(ClothingArr.value);
 }
 function bags(item) {
-  console.log(item);
   Bags.id = item.category_id;
   Bags.title = item.category_title;
 
   BagsArr.value = item.products;
-  //   console.log(ClothingArr.value);
 }
 function Accsesories(item) {
-  console.log(item);
   Bijouteri.id = item.category_id;
   Bijouteri.title = item.category_title;
 
   BijouteriArr.value = item.products;
-  //   console.log(ClothingArr.value);
 }
 function cloth(item) {
-  console.log(item);
   Clothing.id = item.category_id;
   Clothing.title = item.category_title;
 
   ClothingArr.value = item.products;
-  //   console.log(ClothingArr.value);
 }
-
-console.log(ClothingArr.value);
 </script>
 
 <style scoped>

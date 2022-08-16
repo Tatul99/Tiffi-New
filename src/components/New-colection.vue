@@ -87,7 +87,7 @@ const props = defineProps({
   obj: String,
   arr: Array,
 });
-// console.log(props.arr);
+
 let teqvoxSlide = 3;
 let url = HOST;
 let arr = props.arr;
@@ -98,23 +98,14 @@ onMounted(() => {
   if (window.innerWidth < 1041) teqvoxSlide = 2.2;
   if (window.innerWidth > 1040) teqvoxSlide = 3;
   if (window.innerWidth < 455 && arr.length > 9) teqvoxSlide = 3.9;
-  // console.log(teqvoxSlide);
+
   if (window.innerWidth < 455 && arr.length <= 9) teqvoxSlide = 3.5;
 });
 onUnmounted(() => {
   window.removeEventListener("resize", getDimensions);
 });
-// async function zapros() {
-//   const response = await axios.get(url + "/api/app/news/home");
 
-//   arr = response.data.data.items;
-//   console.log(arr.length);
-// }
-if (arr.length) {
-  //   console.log(arr);
-}
 function getDimensions() {
-  //   console.log("kamac aper hasar" + window.innerWidth);
   width = document.documentElement.clientWidth;
 
   if (window.innerWidth < 1041) teqvoxSlide = 2.2;

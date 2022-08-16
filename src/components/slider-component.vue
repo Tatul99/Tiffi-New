@@ -27,16 +27,12 @@
 
 <script setup>
 import { HOST } from "../providers";
-// console.log(HOST);
+
 const url = HOST;
-function foo(path) {
-  // console.log(url + path);
-}
+function foo(path) {}
 const props = defineProps({
   arr: Object,
 });
-// console.log(props.arr);
-// console.log(HOST);
 </script>
 
 <style scoped>

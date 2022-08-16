@@ -143,7 +143,6 @@ import { computed } from "vue";
 import { useRoute } from "vue-router";
 let Route = useRoute();
 let active = computed(() => {
-  console.log(Route.path);
   let path = Route.path;
   return path;
 });
@@ -191,7 +190,6 @@ function chengeData(bool) {
   this.cuycTalMenu = bool;
 }
 function ChangeresponsiveMenuiBool(i, item) {
-  // console.log(item.id);
   this.active2 = i;
   if (item.id != 1 && item.id != 6) {
     this.responsiveMenuiBool = true;
@@ -199,16 +197,12 @@ function ChangeresponsiveMenuiBool(i, item) {
     this.responsiveMenuiBool = false;
     this.active = i;
   }
-
-  console.log(this.responsiveMenuiBool);
 }
 function bool1() {
   bool = !bool;
-  console.log(bool);
 }
 function openResponsMenu() {
   this.openMenu = true;
-  // console.log(this.openMenu);
 }
 </script>
 <style scoped>

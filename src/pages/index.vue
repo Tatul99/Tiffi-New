@@ -34,7 +34,7 @@ let NewColectionArr = ref([]);
 let compilationArr = ref([]);
 let ForManArr = ref([]);
 let ForWomenArr = ref([]);
-// console.log(HOST);
+
 let url = HOST;
 let ForMan = {
   miniTitle: "для ",
@@ -55,7 +55,6 @@ onMounted(() => {
   zaprosForWomencomponent();
 });
 
-// console.log(store);
 async function zaprosForManComponent() {
   const response = await axios.get(url + "/api/app/products/for_men");
   ForManArr.value = response.data.data.items;
@@ -68,7 +67,7 @@ async function zaprosForWomencomponent() {
 }
 async function zapros() {
   const response = await axios.get(url + "/api/app/collection");
-  // console.log(response.data.data);
+
   compilationArr.value = response.data.data.items;
   console.log(compilationArr.value);
 }

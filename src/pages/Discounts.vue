@@ -7,8 +7,6 @@
       <div v-if="ForWomenArr.length" class="col-12 col-md-10">
         <slider-main-component :obj="ForWoman" :slideArr="ForWomenArr" />
         <slider-main-component :obj="ForMan" :slideArr="ForManArr" />
-        <!-- <slider-main-component :obj="Shoes" :slideArr="ShoesArr" /> -->
-        <!-- <slider-main-component :obj="Dior" :slideArr="DiorArr" /> -->
       </div>
     </div>
   </div>
@@ -40,17 +38,13 @@ onMounted(() => {
   ForMenRequest();
   ForWomenRequest();
 });
-console.log(RequestEnd.value);
-if (RequestEnd.value == 1) {
-  console.log(1234);
-}
+
 async function ForMenRequest() {
   const response = await axios.get(
     url + "/api/app/products/discounted-products/for_men"
   );
   ForManArr.value = response.data.data.items;
   RequestEnd.value = 1;
-  console.log(RequestEnd.value);
 }
 
 async function ForWomenRequest() {
@@ -59,7 +53,6 @@ async function ForWomenRequest() {
   );
   ForWomenArr.value = response.data.data.items;
   RequestEnd.value = 1;
-  console.log(ForWomenArr.value);
 }
 </script>
 
