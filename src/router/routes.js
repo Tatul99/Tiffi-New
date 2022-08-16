@@ -38,6 +38,20 @@ const routes = [
       layout: "main-layout",
     },
   },
+  {
+    path: "/Discounts",
+    component: () => import("../pages/Discounts.vue"),
+    meta: {
+      layout: "main-layout",
+    },
+  },
+  {
+    path: "/New",
+    component: () => import("../pages/NewColections.vue"),
+    meta: {
+      layout: "main-layout",
+    },
+  },
 ];
 
 export default routes;

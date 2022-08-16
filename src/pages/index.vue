@@ -39,11 +39,13 @@ let url = HOST;
 let ForMan = {
   miniTitle: "для ",
   title: " Мужчин",
+  path: "/ForMan",
   id: 1,
 };
 let ForWoman = {
   miniTitle: "для ",
   title: "Женщин",
+  path: "/ForWoman",
   id: 2,
 };
 onMounted(() => {

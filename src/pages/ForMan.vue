@@ -42,7 +42,9 @@
 import { ref, onMounted } from "vue";
 import axios from "axios";
 import { HOST } from "../providers";
+import { useRoute } from "vue-router";
 import SliderMainComponent from "../components/slider-main-component.vue";
+let route = useRoute();
 
 onMounted(() => {
   ForManRequest();

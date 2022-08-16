@@ -1,16 +1,18 @@
 <template>
   <div class="col-12 main-colection">
-    <div class="row">
-      <div class="title col-12" v-if="obj.text">
-        {{ obj.text ? obj.text : "" }}
-      </div>
-      <div v-if="path !== '/cloaths-info/'" class="row seeMoreDiv">
-        <div class="seeMore q-pr-md">Увидеть Больше</div>
-        <img
-          src="../../public/forMan/left-vector.svg"
-          class="cursor-pointer seeMoreIcon"
-          alt=""
-        />
+    <div v-if="obj">
+      <div class="row">
+        <div class="title col-12" v-if="obj.text">
+          {{ obj.text ? obj.text : "" }}
+        </div>
+        <div v-if="path !== '/cloaths-info/'" class="row seeMoreDiv">
+          <div class="seeMore q-pr-md">Увидеть Больше</div>
+          <img
+            src="../../public/forMan/left-vector.svg"
+            class="cursor-pointer seeMoreIcon"
+            alt=""
+          />
+        </div>
       </div>
     </div>
   </div>
@@ -39,7 +41,7 @@
 
           <vueper-slide
             v-for="(i, index) in arr"
-            :key="i"
+            :key="i.id"
             class="items"
             :content="i.title"
             :summary="i.info"
@@ -80,7 +82,7 @@ import "vueperslides/dist/vueperslides.css";
 import axios from "axios";
 import { ref } from "vue";
 import { HOST } from "../providers";
-import { onMounted } from "@vue/runtime-core";
+import { onMounted, onUnmounted } from "@vue/runtime-core";
 const props = defineProps({
   obj: String,
   arr: Array,
@@ -96,8 +98,11 @@ onMounted(() => {
   if (window.innerWidth < 1041) teqvoxSlide = 2.2;
   if (window.innerWidth > 1040) teqvoxSlide = 3;
   if (window.innerWidth < 455 && arr.length > 9) teqvoxSlide = 3.9;
-  console.log(teqvoxSlide);
+  // console.log(teqvoxSlide);
   if (window.innerWidth < 455 && arr.length <= 9) teqvoxSlide = 3.5;
+});
+onUnmounted(() => {
+  window.removeEventListener("resize", getDimensions);
 });
 // async function zapros() {
 //   const response = await axios.get(url + "/api/app/news/home");
@@ -150,7 +155,7 @@ function getDimensions() {
   font-size: 25px;
   font-weight: 500;
   position: absolute;
-  right: 0;
+  right: 250px;
   bottom: -50px;
 }
 .text {

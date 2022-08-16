@@ -17,8 +17,8 @@
               <img :src="obj.img" alt="" />
             </div>
             <!-- <router-link @click="pushpath" to="/brand"> -->
-            <router-link :to="path"
-              ><div v-if="path !== '/cloaths-info/'" class="row">
+            <router-link v-if="obj.path" :to="obj.path"
+              ><div v-if="obj.path !== '/cloaths-info/'" class="row">
                 <div class="seeMore q-pr-md">Увидеть Больше</div>
                 <img
                   src="../../public/forMan/left-vector.svg"
@@ -118,9 +118,16 @@ const props = defineProps({
 let width = document.documentElement.clientWidth;
 let slideToShow = 3;
 let arr = ref([]);
-let path = "";
+// let path = ref("/ForMan");
 let activeBtn = 0;
 let slide = ref(1);
+console.log(props.obj.title);
+// if (props.obj.title === "Мужчин") {
+//   path.value = "/ForMan";
+// } else if (props.obj.title === "Женщин") {
+//   path.value = "/ForWoman";
+// }
+// console.log(path.value);
 onMounted(() => {
   window.addEventListener("resize", getDimensions());
   foo();
@@ -155,8 +162,6 @@ function foo() {
   arr.value.push(arr2);
   // console.log(arr);
 }
-
-console.log(arr.value);
 </script>
 
 <style scoped>

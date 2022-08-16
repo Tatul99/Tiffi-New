@@ -143,6 +143,7 @@ import { computed } from "vue";
 import { useRoute } from "vue-router";
 let Route = useRoute();
 let active = computed(() => {
+  console.log(Route.path);
   let path = Route.path;
   return path;
 });
@@ -167,7 +168,7 @@ let menuTitles = [
   {
     id: 3,
     name: "для Мужчин",
-    path: "/forMan",
+    path: "/ForMan",
   },
   {
     id: 4,
