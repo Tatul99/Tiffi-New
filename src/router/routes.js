@@ -52,6 +52,13 @@ const routes = [
       layout: "main-layout",
     },
   },
+  {
+    path: "/cloaths-info/:id?",
+    component: () => import("../pages/cloaths-info.vue"),
+    meta: {
+      layout: "main-layout",
+    },
+  },
 ];
 
 export default routes;

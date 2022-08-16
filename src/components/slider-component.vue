@@ -5,18 +5,22 @@
     <div
       class="line-div cursor-pointer"
       v-for="img in arr"
-      :key="img"
+      :key="img.id"
       :style="`width:${100 / arr.length - 1}%;height:522px`"
     >
-      <q-img
-        @click="foo(img.image)"
-        class="rounded-borders col-1 col-md-2 row images items-end"
-        :src="url + '/' + img.image"
-      >
-      </q-img>
+      <router-link :to="'/cloaths-info/' + img.id">
+        <q-img
+          @click="foo(img.image)"
+          class="rounded-borders col-1 col-md-2 row images items-end"
+          :src="url + '/' + img.image"
+        >
+        </q-img>
+      </router-link>
       <div class="text text-weight-bolder">{{ img.title }}</div>
       <div class="prise">${{ img.price }}</div>
-      <div class="Discount" v-if="img.Discount">{{ img.Discount }}</div>
+      <div class="Discount" v-if="img.discount_percent">
+        {{ img.discount_percent }}%
+      </div>
     </div>
   </div>
 </template>

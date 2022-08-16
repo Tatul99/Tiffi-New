@@ -6,41 +6,53 @@
           <div class="big-Title">Новинки</div>
         </div>
       </div>
-      <div class="col-12">
-        <div v-if="RequestEnd === 1">
-          <new-colection :arr="NewColectionArr" />
-        </div>
-        <!-- <new-colection :arr="array" :obj="obj" /> -->
-        <!-- <slider-main-component :obj="ForMan" :slideArr="ForManArr" />
-        <slider-main-component :obj="ForWoman" :slideArr="ForWomanArr" />
-        <slider-main-component :obj="Shoes" :slideArr="ShoesArr" />
-        <slider-main-component
-          :obj="BagsAccessories"
-          :slideArr="BagsAccessoriesArr"
-        /> -->
-        <!-- <slider-main-component :obj="Dior" :slideArr="DiorArr" /> -->
+      <div v-if="ForWomenArr.length" class="col-12">
+        <slider-main-component :obj="ForMan" :slideArr="ForManArr" />
+        <slider-main-component :obj="ForWoman" :slideArr="ForWomenArr" />
       </div>
     </div>
   </div>
 </template>
 <script setup>
-import NewColection from "../components/New-colection.vue";
-import SliderMainComponent from "../components/slider-main-component.vue";
 import { ref, onMounted } from "vue";
 import axios from "axios";
 import { HOST } from "../providers";
+import SliderMainComponent from "../components/slider-main-component.vue";
 let url = HOST;
+let ForManArr = ref([]);
+let ForWomenArr = ref([]);
 let RequestEnd = ref(0);
-const NewColectionTextObject = { text: "" };
+let ForMan = {
+  miniTitle: "для ",
+  title: " Мужчин",
+  path: "/ForMan",
+  id: 1,
+};
+let ForWoman = {
+  miniTitle: "для ",
+  title: "Женщин",
+  path: "/ForWoman",
+  id: 2,
+};
+
 onMounted(() => {
-  RequestforNewColection();
+  ForMenRequest();
+  ForWomenRequest();
 });
-let NewColectionArr = ref([]);
 
-async function RequestforNewColection() {
-  const response = await axios.get(url + "/api/app/news/home");
+async function ForMenRequest() {
+  const response = await axios.get(
+    url + "/api/app/products/new-products/for_men"
+  );
+  ForManArr.value = response.data.data.items;
+  RequestEnd.value = 1;
+}
 
-  NewColectionArr.value = response.data.data.items;
+async function ForWomenRequest() {
+  const response = await axios.get(
+    url + "/api/app/products/new-products/for_women"
+  );
+  ForWomenArr.value = response.data.data.items;
   RequestEnd.value = 1;
 }
 </script>

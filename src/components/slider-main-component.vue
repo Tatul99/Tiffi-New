@@ -118,19 +118,13 @@ const props = defineProps({
 let width = document.documentElement.clientWidth;
 let slideToShow = 3;
 let arr = ref([]);
-// let path = ref("/ForMan");
+
 let activeBtn = 0;
 let slide = ref(1);
-console.log(props.obj.title);
-// if (props.obj.title === "Мужчин") {
-//   path.value = "/ForMan";
-// } else if (props.obj.title === "Женщин") {
-//   path.value = "/ForWoman";
-// }
-// console.log(path.value);
+
 onMounted(() => {
   window.addEventListener("resize", getDimensions());
-  foo();
+  ChengearrLength();
 });
 onUnmounted(() => {
   window.addEventListener("resize", getDimensions());
@@ -138,29 +132,23 @@ onUnmounted(() => {
 function getDimensions() {
   width = document.documentElement.clientWidth;
 
-  //   console.log(window.innerWidth);
   if (window.innerWidth <= 1000) slideToShow = 2;
   if (window.innerWidth > 1000) slideToShow = 3;
-  // if (window.innerWidth < 1040) arrslideToShow = 3;
-  // else if (window.innerWidth > 1040) arrslideToShow = 4;
-
-  // if (arrwidth + 15 <= 500) arrslideToShow = 1;
 }
-function foo() {
+function ChengearrLength() {
   let arr2 = [];
 
   if (props.slideArr.length) {
     for (let i = 0; i < props.slideArr.length; i++) {
       if (arr2.length == slideToShow) {
         arr.value.push(arr2);
-        // console.log(arr2);
+
         arr2 = [];
       }
       arr2.push(props.slideArr[i]);
     }
   }
   arr.value.push(arr2);
-  // console.log(arr);
 }
 </script>
 
