@@ -58,18 +58,15 @@ onMounted(() => {
 async function zaprosForManComponent() {
   const response = await axios.get(url + "/api/app/products/for_men");
   ForManArr.value = response.data.data.items;
-  console.log(ForManArr.value);
 }
 async function zaprosForWomencomponent() {
   const response = await axios.get(url + "/api/app/products/for_women");
   ForWomenArr.value = response.data.data.items;
-  console.log(ForWomenArr.value);
 }
 async function zapros() {
   const response = await axios.get(url + "/api/app/collection");
 
   compilationArr.value = response.data.data.items;
-  console.log(compilationArr.value);
 }
 async function zaprosforNewColection() {
   const response = await axios.get(url + "/api/app/news/home");

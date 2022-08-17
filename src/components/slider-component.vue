@@ -10,7 +10,7 @@
     >
       <router-link :to="'/cloaths-info/' + img.id">
         <q-img
-          @click="foo(img.image)"
+          @click="foo(img.id)"
           class="rounded-borders col-1 col-md-2 row images items-end"
           :src="url + '/' + img.image"
         >
@@ -27,12 +27,17 @@
 
 <script setup>
 import { HOST } from "../providers";
+import { useStore } from "vuex";
+let store = useStore();
 
 const url = HOST;
-function foo(path) {}
+
 const props = defineProps({
   arr: Object,
 });
+function foo(id) {
+  store.commit("module1/chengeId", id);
+}
 </script>
 
 <style scoped>
