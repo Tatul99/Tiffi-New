@@ -17,8 +17,7 @@ import { onMounted, ref } from "vue";
 import Menu from "./leyaout-component/menu.vue";
 import Footer from "./leyaout-component/fotter.vue";
 
-// console.log(Menu.value);
-// console.log(Footer.value);
+
 onMounted(() => {
   window.addEventListener("scroll", handleScroll);
 });
