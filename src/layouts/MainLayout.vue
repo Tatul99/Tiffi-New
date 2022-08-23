@@ -4,26 +4,30 @@
   <slot />
   <Footer />
 
-  <a class="scroll cursor-pointer" @click="GoToTop()" v-if="scrollY === 500">
-    <!-- <div class="icon"></div> -->
+  <a
+    class="scroll cursor-pointer"
+    @click="GoToTop()"
+    v-if="cuycTalVerevTanoxButton"
+  >
   </a>
 </template>
 
 <script setup>
+import { onMounted, ref } from "vue";
 import Menu from "./leyaout-component/menu.vue";
 import Footer from "./leyaout-component/fotter.vue";
-import { onMounted } from "vue";
-console.log(Menu);
+
+
 onMounted(() => {
   window.addEventListener("scroll", handleScroll);
 });
-
+let cuycTalVerevTanoxButton = ref(false);
 let scrollY = 0;
 function handleScroll() {
-  this.scrollY = window.scrollY;
-  if (this.scrollY >= 50) {
-    // console.log(12345);
-  }
+  scrollY = window.scrollY;
+  if (scrollY >= 500) {
+    cuycTalVerevTanoxButton.value = true;
+  } else cuycTalVerevTanoxButton.value = false;
 }
 function GoToTop() {
   window.scrollTo({

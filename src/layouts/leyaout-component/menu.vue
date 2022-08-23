@@ -92,7 +92,12 @@
                 :class="i > 0 && i < menuTitles.length - 1 ? 'items2' : ''"
               >
                 <router-link :to="item.path">
-                  <div :class="active === item.path ? 'active' : ''">
+                  <div
+                    @mouseover="
+                      item.type !== undefined ? chengeType(item.type) : ''
+                    "
+                    :class="active === item.path ? 'active' : ''"
+                  >
                     {{ item.name }}
                   </div></router-link
                 >
@@ -139,8 +144,12 @@
 </template>
 
 <script setup>
-import { computed } from "vue";
+import { computed, ref } from "vue";
 import { useRoute } from "vue-router";
+import { useStore } from "vuex";
+import UnderMenu from "../../components/underMenu.vue";
+import UnderMenuMobile from "../../components/under-menu-mobile.vue";
+let store = useStore();
 let Route = useRoute();
 let active = computed(() => {
   let path = Route.path;
@@ -148,11 +157,13 @@ let active = computed(() => {
 });
 
 let bool = false;
-let openMenu = false;
+let openMenu = ref(false);
 let active2 = 0;
 let cuycTalMenu = true;
 let searchInputValue = "";
 let responsiveMenuiBool = false;
+let MenuType = ref("");
+
 let menuTitles = [
   {
     id: 1,
@@ -163,21 +174,25 @@ let menuTitles = [
     id: 2,
     name: "для Женщин",
     path: "/ForWoman",
+    type: "for_women",
   },
   {
     id: 3,
     name: "для Мужчин",
-    path: "/forMan",
+    path: "/ForMan",
+    type: "for_men",
   },
   {
     id: 4,
     name: "Новинки",
     path: "/New",
+    type: "for_women",
   },
   {
     id: 5,
     name: "Скидки",
     path: "/Discounts",
+    type: "for_men",
   },
   {
     id: 6,
@@ -185,29 +200,27 @@ let menuTitles = [
     path: "/Aboute",
   },
 ];
+function chengeType(type) {
+  store.commit("module1/chengeMenuType", type);
+}
 
 function chengeData(bool) {
   this.cuycTalMenu = bool;
 }
 function ChangeresponsiveMenuiBool(i, item) {
-  // console.log(item.id);
   this.active2 = i;
-  if (item.id != 1 && item.id != 6) {
+  if (item.type) {
     this.responsiveMenuiBool = true;
   } else {
     this.responsiveMenuiBool = false;
     this.active = i;
   }
-
-  console.log(this.responsiveMenuiBool);
 }
 function bool1() {
   bool = !bool;
-  console.log(bool);
 }
 function openResponsMenu() {
-  this.openMenu = true;
-  // console.log(this.openMenu);
+  openMenu.value = true;
 }
 </script>
 <style scoped>
