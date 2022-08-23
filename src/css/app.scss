@@ -187,8 +187,8 @@ a {
     height: 950px;
   }
   .items {
-    width: 300px !important;
-    height: 400px !important;
+    width: unset;
+    height: unset;
   }
   .vueperslide--active {
     width: 495px !important;

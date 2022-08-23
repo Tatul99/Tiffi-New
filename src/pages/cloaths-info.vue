@@ -63,7 +63,6 @@
         </div>
       </div>
     </div>
-    <!-- <recently-watched /> -->
   </div>
   <image-popap
     v-if="chengeImagePage"

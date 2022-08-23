@@ -44,7 +44,7 @@
                   </div>
                   <div class="col-12 background">
                     <!-- mobile-responsive menu -->
-                    <!-- <under-menu-mobile class="lt-sm" /> -->
+                    <under-menu-mobile class="lt-sm" />
                     <div class="col-8 gt-xs q-mt-xl responsive-menu-line">
                       <div class="menu row justify-around">
                         <div
@@ -148,6 +148,7 @@ import { computed, ref } from "vue";
 import { useRoute } from "vue-router";
 import { useStore } from "vuex";
 import UnderMenu from "../../components/underMenu.vue";
+import UnderMenuMobile from "../../components/under-menu-mobile.vue";
 let store = useStore();
 let Route = useRoute();
 let active = computed(() => {
@@ -156,7 +157,7 @@ let active = computed(() => {
 });
 
 let bool = false;
-let openMenu = false;
+let openMenu = ref(false);
 let active2 = 0;
 let cuycTalMenu = true;
 let searchInputValue = "";
@@ -208,7 +209,7 @@ function chengeData(bool) {
 }
 function ChangeresponsiveMenuiBool(i, item) {
   this.active2 = i;
-  if (item.id != 1 && item.id != 6) {
+  if (item.type) {
     this.responsiveMenuiBool = true;
   } else {
     this.responsiveMenuiBool = false;
@@ -219,7 +220,7 @@ function bool1() {
   bool = !bool;
 }
 function openResponsMenu() {
-  this.openMenu = true;
+  openMenu.value = true;
 }
 </script>
 <style scoped>

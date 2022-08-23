@@ -34,17 +34,15 @@ let type = computed(() => store.state.module1.type);
 watch(
   () => categoriesId.value,
   (categoriesId) => {
-    console.log(categoriesId, type.value);
     SubCategoriesRequest();
   }
 );
-console.log(categoriesId.value);
+
 onMounted(() => {});
 let url = HOST;
 watch(
   () => type.value,
   (newType) => {
-    console.log(categoriesId.value, newType);
     if (newType !== "" || newType !== undefined) {
       SubCategoriesRequest();
     }
