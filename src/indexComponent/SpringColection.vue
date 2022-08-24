@@ -5,7 +5,7 @@
         <div class="row content justify-between">
           <div class="col-12 col-md-6">
             <div class="row items-center full-height">
-              <div class="col-12">
+              <div class="col-10">
                 <div class="big-title text-weight-bold">
                   Весна 2022 коллекция
                 </div>
@@ -29,7 +29,7 @@
           </div>
           <div class="col-11 col-sm-12 col-md-6">
             <video
-              width="856px"
+              width="100%"
               height="793px"
               style="object-fit: fill"
               autoplay
@@ -52,7 +52,7 @@
   font-weight: 800;
 }
 .text {
-  font-size: 23px;
+  font-size: 21px;
 }
 .more {
   font-size: 26px;

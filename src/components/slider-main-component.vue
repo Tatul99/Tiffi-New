@@ -1,9 +1,9 @@
 <template>
   <div class="col-12 col-md-10 q-mt-xl main-slider">
     <div>
-      <div class="col">
-        <div class="row justify-start slider-title q-ml-md">
-          <div class="col-10">
+      <div class="col-12">
+        <div class="row justify-end slider-title q-ml-md">
+          <div class="col-11">
             <div class="row">
               <div
                 v-if="obj.miniTitle"
@@ -30,80 +30,82 @@
           </div>
         </div>
       </div>
-      <q-carousel
-        v-model="slide"
-        transition-prev="slide-right"
-        transition-next="slide-left"
-        swipeable
-        infinite
-        animated
-        control-color="primary"
-        padding
-        ref="carousel"
-        class="bg-grey-1 shadow-2 rounded-borders carusel"
-      >
-        <q-carousel-slide
-          v-for="(item, i) in arr"
-          :key="item"
-          :name="i + 1"
-          class="column no-wrap"
+      <div class="row justify-end">
+        <q-carousel
+          v-model="slide"
+          transition-prev="slide-right"
+          transition-next="slide-left"
+          swipeable
+          infinite
+          animated
+          control-color="primary"
+          padding
+          ref="carousel"
+          class="bg-grey-1 shadow-2 col-11 rounded-borders carusel"
         >
-          <div
-            class="row fit justify-start items-center q-gutter-xs q-col-gutter no-wrap slider-div"
+          <q-carousel-slide
+            v-for="(item, i) in arr"
+            :key="item"
+            :name="i + 1"
+            class="column no-wrap"
           >
-            <slider-component :arr="item" />
-            <!-- <q-img
+            <div
+              class="row fit justify-start items-center q-gutter-xs q-col-gutter no-wrap slider-div"
+            >
+              <slider-component :arr="item" />
+              <!-- <q-img
             v-for="info in item"
             :key="info"
             class="rounded-borders col-3 full-height"
             :src="info.image"
           ></q-img> -->
-            <!-- <div class="text">{{ info.text }}</div>
+              <!-- <div class="text">{{ info.text }}</div>
           <div class="pr">{{ info.prise }}</div> -->
-          </div>
-        </q-carousel-slide>
+            </div>
+          </q-carousel-slide>
 
-        <template v-slot:control class="btns">
-          <q-carousel-control position="bottom-right" :offset="[18, 18]">
-            <q-btn
-              round
-              push
-              dense
-              class="arrow-btn"
-              :disable="activeBtn === 0"
-              text-color="black"
-              @click="$refs.carousel.previous(), activeBtn--"
-            >
-              <q-avatar size="66px">
-                <img
-                  :src="
-                    activeBtn === 0
-                      ? './index/right.svg'
-                      : './index/right-black.svg'
-                  "
-                />
-              </q-avatar>
-            </q-btn>
-            <q-btn
-              push
-              round
-              :disable="activeBtn === arr.length - 1"
-              text-color="black"
-              @click="$refs.carousel.next(), activeBtn++"
-            >
-              <q-avatar size="66px">
-                <img
-                  :src="
-                    activeBtn === arr.length - 1
-                      ? './index/left.svg'
-                      : './index/left-black.svg'
-                  "
-                />
-              </q-avatar>
-            </q-btn>
-          </q-carousel-control>
-        </template>
-      </q-carousel>
+          <template v-slot:control class="btns">
+            <q-carousel-control position="bottom-right" :offset="[18, 18]">
+              <q-btn
+                round
+                push
+                dense
+                class="arrow-btn"
+                :disable="activeBtn === 0"
+                text-color="black"
+                @click="$refs.carousel.previous(), activeBtn--"
+              >
+                <q-avatar size="66px">
+                  <img
+                    :src="
+                      activeBtn === 0
+                        ? './index/right.svg'
+                        : './index/right-black.svg'
+                    "
+                  />
+                </q-avatar>
+              </q-btn>
+              <q-btn
+                push
+                round
+                :disable="activeBtn === arr.length - 1"
+                text-color="black"
+                @click="$refs.carousel.next(), activeBtn++"
+              >
+                <q-avatar size="66px">
+                  <img
+                    :src="
+                      activeBtn === arr.length - 1
+                        ? './index/left.svg'
+                        : './index/left-black.svg'
+                    "
+                  />
+                </q-avatar>
+              </q-btn>
+            </q-carousel-control>
+          </template>
+        </q-carousel>
+      </div>
     </div>
   </div>
 </template>

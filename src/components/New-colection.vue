@@ -1,25 +1,29 @@
 <template>
   <div class="col-12 main-colection">
-    <div v-if="obj">
-      <div class="row">
-        <div class="title col-12" v-if="obj.text">
-          {{ obj.text ? obj.text : "" }}
-        </div>
-        <div v-if="path !== '/cloaths-info/'" class="row seeMoreDiv">
-          <div class="seeMore q-pr-md">Увидеть Больше</div>
-          <img
-            src="../../public/forMan/left-vector.svg"
-            class="cursor-pointer seeMoreIcon"
-            alt=""
-          />
+    <div class="row justify-end">
+      <div class="col-11">
+        <div v-if="obj">
+          <div class="row">
+            <div class="title col-12" v-if="obj.text">
+              {{ obj.text ? obj.text : "" }}
+            </div>
+            <div class="row seeMoreDiv">
+              <div class="seeMore q-pr-md">Увидеть Больше</div>
+              <img
+                src="../../public/forMan/left-vector.svg"
+                class="cursor-pointer seeMoreIcon"
+                alt=""
+              />
+            </div>
+          </div>
         </div>
       </div>
     </div>
   </div>
   <div class="col-12 content">
-    <div class="q-ml-xl sliderarancmargin row">
+    <div class="q-ml-xl sliderarancmargin row justify-end">
       <div
-        class="col-12 col-md-10 content1"
+        class="col-12 col-md-11 content1"
         style="height: 700px; position: relative"
       >
         <vueper-slides
@@ -84,22 +88,22 @@ import { ref } from "vue";
 import { HOST } from "../providers";
 import { onMounted, onUnmounted } from "@vue/runtime-core";
 const props = defineProps({
-  obj: String,
+  obj: Object,
   arr: Array,
 });
 
-let teqvoxSlide = 3;
+let teqvoxSlide = ref(3);
 let url = HOST;
 let arr = props.arr;
 let width = document.documentElement.clientWidth;
 let active = 1;
 onMounted(() => {
   window.addEventListener("resize", getDimensions);
-  if (window.innerWidth < 1041) teqvoxSlide = 2.2;
-  if (window.innerWidth > 1040) teqvoxSlide = 3;
-  if (window.innerWidth < 455 && arr.length > 9) teqvoxSlide = 3.9;
+  if (window.innerWidth < 1041) teqvoxSlide.value = 2.2;
+  if (window.innerWidth > 1040) teqvoxSlide.value = 3;
+  if (window.innerWidth < 455 && arr.length > 9) teqvoxSlide.value = 1.57;
 
-  if (window.innerWidth < 455 && arr.length <= 9) teqvoxSlide = 3.5;
+  if (window.innerWidth < 455 && arr.length <= 9) teqvoxSlide.value = 3.5;
 });
 onUnmounted(() => {
   window.removeEventListener("resize", getDimensions);
@@ -215,14 +219,13 @@ function getDimensions() {
 .title {
   font-size: 70px;
   font-weight: 700;
-  margin-left: 80px;
 }
 .seeMore {
   font-size: 25px;
   text-decoration: none;
 }
 .seeMoreDiv {
-  margin: 0px 0px 30px 80px;
+  margin: 0px 0px 30px 0px;
 }
 
 @media all and (max-width: 1025px) {

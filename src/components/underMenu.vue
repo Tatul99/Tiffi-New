@@ -54,8 +54,6 @@ onMounted(() => {
 });
 function chengeInfo(id, i) {
   store.commit("module1/changeCategoriesId", [id, i]);
-
-  console.log(active.value);
 }
 async function MenuCategorisRequest() {
   const response = await axios.get(url + "/api/app/categories");

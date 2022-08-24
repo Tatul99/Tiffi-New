@@ -23,7 +23,6 @@
     <div class="container">
       <div class="text-title">ОПИСАНИЕ</div>
       <div class="text">
-       
         {{ info.info }}
       </div>
     </div>
@@ -35,7 +34,7 @@ import { ref } from "vue";
 
 let active = ref(0);
 const props = defineProps({
-  info: Array,
+  info: Object,
 });
 </script>
 

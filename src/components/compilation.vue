@@ -19,7 +19,7 @@
         </div>
       </div>
     </div>
-    <div class="">
+    <div class="row justify-end">
       <q-carousel
         v-model="slide"
         transition-prev="slide-right"
@@ -30,7 +30,7 @@
         control-color="primary"
         padding
         ref="carousel"
-        class="bg-grey-1 shadow-2 rounded-borders carusel"
+        class="bg-grey-1 shadow-2 col-11 rounded-borders carusel"
       >
         <q-carousel-slide
           v-for="(item, i) in filtrArr"
@@ -114,7 +114,7 @@ function getDimensions() {
 
   if (window.innerWidth < 1041) slideToShow = 3;
   if (window.innerWidth > 1040) slideToShow = 4;
-  if (window.innerWidth < 450) slideToShow = 2;
+  if (window.innerWidth < 455) slideToShow = 2;
   // if (window.innerWidth < 1040) this.slideToShow = 3;
   // else if (window.innerWidth > 1040) this.slideToShow = 4;
 

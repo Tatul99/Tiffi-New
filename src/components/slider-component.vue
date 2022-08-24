@@ -19,7 +19,7 @@
       <div class="text text-weight-bolder">{{ img.title }}</div>
       <div class="prise">${{ img.price }}</div>
       <div class="Discount" v-if="img.discount_percent">
-        {{ img.discount_percent }}%
+        -{{ img.discount_percent }}%
       </div>
     </div>
   </div>

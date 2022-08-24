@@ -54,10 +54,19 @@
                 <div class="row justify-center">
                   <div class="col-8" v-for="title in subTitles" :key="title.id">
                     <div
-                      class="row justify-center items-center sub-title"
+                      class="row justify-between items-center sub-title"
                       @click="chengeactivepage(title)"
                     >
-                      {{ title.title }}
+                      <div>{{ title.title }}</div>
+                      <q-icon
+                        :class="
+                          item.name == 'Главная' || item.name == 'О Нас'
+                            ? 'cuycchtalIcon'
+                            : ''
+                        "
+                        class="icons"
+                        :name="'keyboard_arrow_up'"
+                      ></q-icon>
                     </div>
                   </div>
                 </div>
@@ -155,12 +164,7 @@ async function chengeactivepage(title) {
     url + `/api/app/sub_categories/${title.id}/${type}`
   );
   mobileMenuArr.value = response.data.data.items;
-  //   for (let i = 0; i < Subitems.length; i++) {
-  //     if (id === Subitems[i].tabId) {
-  //       console.log(Subitems[i]);
-  //       obj = Subitems[i];
-  //     }
-  //   }
+
   activePage.value = 1;
   activePageTitile.value = title.title;
 }
@@ -182,6 +186,7 @@ function ChangeresponsiveMenuiBool(i, item) {
 <style scoped>
 .responsive-menu-line {
   margin: 53px 0px 105px;
+  overflow-x: auto;
 }
 .active {
   font-size: 22px;
@@ -197,6 +202,7 @@ function ChangeresponsiveMenuiBool(i, item) {
   border-bottom: 1px solid;
   justify-content: center;
   position: relative;
+  margin-top: 40px;
 }
 .cuycchtalIcon {
   display: none;
@@ -204,6 +210,7 @@ function ChangeresponsiveMenuiBool(i, item) {
 .sub-title {
   font-size: 18px;
   height: 40px;
+  margin-top: 30px;
   border-bottom: 1px solid;
 }
 </style>

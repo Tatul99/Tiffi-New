@@ -80,7 +80,7 @@ body {
 .vueperslides__arrow--prev {
   position: absolute;
   top: 744px !important;
-  left: 88% !important;
+  left: 86% !important;
   width: 66px;
   height: 66px;
   background-image: url("../../public/index/right-black.svg");
@@ -103,7 +103,7 @@ body {
   color: black !important;
   position: absolute;
   top: 744px !important;
-  right: -12px !important;
+  right: 40px !important;
   width: 66px;
   height: 66px;
   background-image: url("../../public/index/left-black.svg");
@@ -180,6 +180,9 @@ a {
 .close {
   width: 22px;
   height: 22px;
+}
+.body.platform-ios .q-dialog__inner--minimized > div {
+  max-height: 100% !important;
 }
 
 @media all and (max-width: 1024px) {
@@ -261,11 +264,11 @@ a {
   }
 
   .vueperslides__arrow--prev {
-    top: 364px !important;
+    top: 564px !important;
     left: 60% !important;
   }
   .vueperslides__arrow--next {
-    top: 364px !important;
+    top: 564px !important;
     right: 20px !important;
   }
   .q-field__native {

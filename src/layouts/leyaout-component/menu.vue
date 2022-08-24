@@ -16,71 +16,76 @@
               class="logo"
             />
           </div>
-          <div class="responsUnderMenu col-12" v-if="openMenu">
-            <div class="row justify-center">
-              <div class="col-12">
-                <div class="row justify-center">
-                  <div class="col-12 background">
-                    <div class="row justify-center">
-                      <div class="col-6">
-                        <div class="row justify-end">
-                          <img
-                            src="/icons/logo-big.png"
-                            alt=""
-                            class="logo-mec"
-                          />
+          <q-dialog v-model="openMenu" persistent>
+            <div class="responsUnderMenu col-12" v-if="openMenu">
+              <div class="row justify-center" style="overflow-x: hidden">
+                <div class="col-12">
+                  <div class="row justify-center">
+                    <div class="col-12 background">
+                      <div class="row justify-center">
+                        <div class="col-6">
+                          <div class="row justify-end">
+                            <img
+                              src="/icons/logo-big.png"
+                              alt=""
+                              class="logo-mec"
+                            />
+                          </div>
                         </div>
-                      </div>
-                      <div class="col-4 row items-end justify-center">
-                        <div class="col-8 row justify-end items-end">
-                          <q-icon
-                            @click="openMenu = false"
-                            name="close"
-                            class="cursor-pointer close q-mb-lg"
-                          ></q-icon>
+                        <div class="col-4 row items-end justify-center">
+                          <div class="col-8 row justify-end items-end">
+                            <q-icon
+                              @click="openMenu = false"
+                              name="close"
+                              class="cursor-pointer close q-mb-lg"
+                            ></q-icon>
+                          </div>
                         </div>
                       </div>
                     </div>
-                  </div>
-                  <div class="col-12 background">
-                    <!-- mobile-responsive menu -->
-                    <under-menu-mobile class="lt-sm" />
-                    <div class="col-8 gt-xs q-mt-xl responsive-menu-line">
-                      <div class="menu row justify-around">
-                        <div
-                          @click="ChangeresponsiveMenuiBool(i, item)"
-                          class="items col-12 col-sm-2 cursor-pointer text-weight-bold"
-                          v-for="(item, i) in menuTitles"
-                          :key="item"
-                        >
-                          <router-link :to="item.path">
-                            <div :class="active === item.path ? 'active' : ''">
-                              {{ item.name }}
-                            </div></router-link
+
+                    <div class="col-12 background">
+                      <!-- mobile-responsive menu -->
+                      <under-menu-mobile class="lt-sm" />
+                      <div class="col-8 gt-xs q-mt-xl responsive-menu-line">
+                        <div class="menu row justify-around">
+                          <div
+                            @click="ChangeresponsiveMenuiBool(i, item)"
+                            class="items col-12 col-sm-2 cursor-pointer text-weight-bold"
+                            v-for="(item, i) in menuTitles"
+                            :key="item"
                           >
-                          <q-icon
-                            class="icons"
-                            :name="
-                              i === active2
-                                ? 'keyboard_arrow_down'
-                                : 'keyboard_arrow_up'
-                            "
-                          ></q-icon>
+                            <router-link :to="item.path">
+                              <div
+                                :class="active === item.path ? 'active' : ''"
+                              >
+                                {{ item.name }}
+                              </div></router-link
+                            >
+                            <q-icon
+                              class="icons"
+                              :name="
+                                i === active2
+                                  ? 'keyboard_arrow_down'
+                                  : 'keyboard_arrow_up'
+                              "
+                            ></q-icon>
+                          </div>
                         </div>
+                        <under-menu
+                          class="background gt-xs"
+                          v-if="responsiveMenuiBool"
+                        />
                       </div>
-                      <under-menu
-                        class="background gt-xs"
-                        v-if="responsiveMenuiBool"
-                      />
                     </div>
-                  </div>
-                  <div class="col-12">
-                    <div class="opacity"></div>
+                    <div class="col-12">
+                      <div class="opacity"></div>
+                    </div>
                   </div>
                 </div>
-              </div>
-            </div>
-          </div>
+              </div></div
+          ></q-dialog>
+
           <!-- <div class="opacity lt-md" v-if="responsiveMenuiBool"></div> -->
           <div class="col-8 menu-line">
             <div class="menu row justify-around">
@@ -114,7 +119,7 @@
                 Placeholder="Search"
                 type="search"
                 @click="bool = true"
-                :class="bool ? 'bacel' : 'pakel'"
+                :class="bool || searchInputValue.length ? 'bacel' : 'pakel'"
               >
                 <template v-slot:prepend class="">
                   <q-icon @click="bool1()" name="search"></q-icon>
@@ -129,7 +134,7 @@
                 Placeholder="Search"
                 type="search"
                 @click="bool = true"
-                :class="bool ? 'bacel' : 'pakel'"
+                :class="bool || searchInputValue.length ? 'bacel' : 'pakel'"
               >
                 <template v-slot:append class="">
                   <q-icon @click="bool1()" name="search"></q-icon>
@@ -156,11 +161,11 @@ let active = computed(() => {
   return path;
 });
 
-let bool = false;
+let bool = ref(false);
 let openMenu = ref(false);
 let active2 = 0;
 let cuycTalMenu = true;
-let searchInputValue = "";
+let searchInputValue = ref("");
 let responsiveMenuiBool = false;
 let MenuType = ref("");
 
@@ -200,6 +205,7 @@ let menuTitles = [
     path: "/Aboute",
   },
 ];
+
 function chengeType(type) {
   store.commit("module1/chengeMenuType", type);
 }
@@ -217,7 +223,7 @@ function ChangeresponsiveMenuiBool(i, item) {
   }
 }
 function bool1() {
-  bool = !bool;
+  bool.value = !bool.value;
 }
 function openResponsMenu() {
   openMenu.value = true;
@@ -301,12 +307,10 @@ a {
   width: 45px;
   height: 45px;
 }
-.bacel {
-  color: red;
-}
 
 @media all and (max-width: 1024px) {
   .responsUnderMenu {
+    max-height: 100% !important;
     background: unset;
   }
   .menu-respons {
@@ -336,7 +340,7 @@ a {
   }
   .opacity {
     width: 100vw;
-    height: 100vh;
+    height: 100%;
     background: rgb(15, 15, 15);
     opacity: 0.6;
   }
