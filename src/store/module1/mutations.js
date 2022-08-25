@@ -11,3 +11,6 @@ export function changeCategoriesId(state, payload) {
   state.categoriesId = payload[0];
   state.active = payload[1];
 }
+export function chengeSerchedText(state, payload) {
+  state.SearchedText = payload;
+}

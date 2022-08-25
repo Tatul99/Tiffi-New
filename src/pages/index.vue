@@ -9,7 +9,6 @@
       <new-colection :obj="NewColectionTextObject" :arr="NewColectionArr" />
     </div>
     <div v-if="compilationArr.length">
-      <!-- <slider-main-component :obj="ForMan" :slideArr="compilationArr" /> -->
       <slider-main-component :obj="ForMan" :slideArr="compilationArr" />
     </div>
     <div v-if="ForWomenArr.length">

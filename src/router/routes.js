@@ -59,6 +59,13 @@ const routes = [
       layout: "main-layout",
     },
   },
+  {
+    path: "/searchedProducts",
+    component: () => import("../pages/Search-Products.vue"),
+    meta: {
+      layout: "main-layout",
+    },
+  },
 ];
 
 export default routes;

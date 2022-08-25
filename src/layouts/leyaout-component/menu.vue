@@ -122,7 +122,10 @@
                 :class="bool || searchInputValue.length ? 'bacel' : 'pakel'"
               >
                 <template v-slot:prepend class="">
-                  <q-icon @click="bool1()" name="search"></q-icon>
+                  <router-link
+                    :to="searchInputValue.length ? '/searchedProducts' : ''"
+                    ><q-icon @click="bool1()" name="search"></q-icon
+                  ></router-link>
                 </template>
               </q-input>
             </div>
@@ -137,7 +140,10 @@
                 :class="bool || searchInputValue.length ? 'bacel' : 'pakel'"
               >
                 <template v-slot:append class="">
-                  <q-icon @click="bool1()" name="search"></q-icon>
+                  <router-link
+                    :to="searchInputValue.length ? '/searchedProducts' : ''"
+                    ><q-icon @click="bool1()" name="search"></q-icon
+                  ></router-link>
                 </template>
               </q-input>
             </div>
@@ -152,8 +158,11 @@
 import { computed, ref } from "vue";
 import { useRoute } from "vue-router";
 import { useStore } from "vuex";
+import axios from "axios";
+import { HOST } from "../../providers";
 import UnderMenu from "../../components/underMenu.vue";
 import UnderMenuMobile from "../../components/under-menu-mobile.vue";
+let url = HOST;
 let store = useStore();
 let Route = useRoute();
 let active = computed(() => {
@@ -210,9 +219,11 @@ function chengeType(type) {
   store.commit("module1/chengeMenuType", type);
 }
 
+function searchProduct() {}
 function chengeData(bool) {
   this.cuycTalMenu = bool;
 }
+let SearchProductsArr = ref([]);
 function ChangeresponsiveMenuiBool(i, item) {
   this.active2 = i;
   if (item.type) {
@@ -224,7 +235,12 @@ function ChangeresponsiveMenuiBool(i, item) {
 }
 function bool1() {
   bool.value = !bool.value;
+  if (searchInputValue.value.length) {
+    // SearchProductRequest(searchInputValue.value);
+    store.commit("module1/chengeSerchedText", searchInputValue.value);
+  }
 }
+
 function openResponsMenu() {
   openMenu.value = true;
 }

@@ -4,5 +4,6 @@ export default function () {
     type: "",
     categoriesId: 1,
     state: 0,
+    SearchedText: "",
   };
 }
