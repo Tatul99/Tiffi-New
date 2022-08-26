@@ -46,17 +46,21 @@
 
                     <div class="col-12 background">
                       <!-- mobile-responsive menu -->
-                      <under-menu-mobile class="lt-sm" />
+                      <under-menu-mobile />
                       <div class="col-8 gt-xs q-mt-xl responsive-menu-line">
                         <div class="menu row justify-around">
                           <div
-                            @click="ChangeresponsiveMenuiBool(i, item)"
                             class="items col-12 col-sm-2 cursor-pointer text-weight-bold"
                             v-for="(item, i) in menuTitles"
-                            :key="item"
+                            :key="item.id"
                           >
                             <router-link :to="item.path">
                               <div
+                                @click="
+                                  item.type !== undefined
+                                    ? chengeType(item.type)
+                                    : (cuycTalMenu = false)
+                                "
                                 :class="active === item.path ? 'active' : ''"
                               >
                                 {{ item.name }}
@@ -72,11 +76,8 @@
                             ></q-icon>
                           </div>
                         </div>
-                        <under-menu
-                          class="background gt-xs"
-                          v-if="responsiveMenuiBool"
-                        />
                       </div>
+                      <under-menu v-if="cuycTalMenu" class="background gt-xs" />
                     </div>
                     <div class="col-12">
                       <div class="opacity"></div>
@@ -155,7 +156,7 @@
 </template>
 
 <script setup>
-import { computed, ref } from "vue";
+import { computed, ref, onMounted } from "vue";
 import { useRoute } from "vue-router";
 import { useStore } from "vuex";
 import axios from "axios";
@@ -169,11 +170,15 @@ let active = computed(() => {
   let path = Route.path;
   return path;
 });
-
+onMounted(() => {
+  if (Route.path == "/ForMan" || Route.path == "/Aboute") {
+    cuycTalMenu.value = true;
+  }
+});
 let bool = ref(false);
 let openMenu = ref(false);
 let active2 = 0;
-let cuycTalMenu = true;
+let cuycTalMenu = ref(false);
 let searchInputValue = ref("");
 let responsiveMenuiBool = false;
 let MenuType = ref("");
@@ -216,13 +221,14 @@ let menuTitles = [
 ];
 
 function chengeType(type) {
+  console.log(1234);
+
   store.commit("module1/chengeMenuType", type);
+  cuycTalMenu.value = true;
 }
 
 function searchProduct() {}
-function chengeData(bool) {
-  this.cuycTalMenu = bool;
-}
+
 let SearchProductsArr = ref([]);
 function ChangeresponsiveMenuiBool(i, item) {
   this.active2 = i;
@@ -324,7 +330,7 @@ a {
   height: 45px;
 }
 
-@media all and (max-width: 1024px) {
+@media all and (max-width: 1025px) {
   .responsUnderMenu {
     max-height: 100% !important;
     background: unset;

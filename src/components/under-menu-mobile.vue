@@ -1,5 +1,5 @@
 <template>
-  <div class="col-8 responsive-menu-line" v-if="activePage == 0">
+  <div class="col-8 responsive-menu-line lt-sm" v-if="activePage == 0">
     <div class="menu row justify-around">
       <div
         @click="ChangeresponsiveMenuiBool(i, item)"

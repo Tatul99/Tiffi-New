@@ -6,7 +6,11 @@
     <div class="row justify-end">
       <div class="col-11 container">
         <div class="row justify-between">
-          <div class="items col-3" v-for="item in productsArr" :key="item.id">
+          <div
+            class="items col-md-3 col-xs-6"
+            v-for="item in productsArr"
+            :key="item.id"
+          >
             <router-link :to="'/cloaths-info/' + item.id">
               <img
                 @click="foo(item.id)"
