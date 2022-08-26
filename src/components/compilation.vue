@@ -163,6 +163,9 @@ let path = "";
 </script>
 
 <style scoped>
+.main-slider {
+  margin-top: 400px;
+}
 .btns {
   position: absolute;
   bottom: 0px;

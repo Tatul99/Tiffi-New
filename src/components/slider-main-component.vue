@@ -156,7 +156,7 @@ function ChengearrLength() {
 
 <style scoped>
 .main-slider {
-  margin-top: 200px;
+  margin-top: 400px;
 }
 .btns {
   position: absolute;

@@ -1,5 +1,5 @@
 <template>
-  <div class="col-12 q-mt-xl q-mb-xl">
+  <div class="col-12 q-mt-xl colection-container">
     <div class="row justify-center">
       <div class="col-10">
         <div class="row content justify-between">
@@ -30,7 +30,7 @@
           <div class="col-11 col-sm-12 col-md-6">
             <video
               width="100%"
-              height="793px"
+              height="703px"
               style="object-fit: fill"
               autoplay
               loop
@@ -47,6 +47,9 @@
 <script setup></script>
 
 <style scoped>
+.colection-container {
+  margin-top: 72px;
+}
 .big-title {
   font-size: 100px;
   font-weight: 800;

@@ -1,10 +1,7 @@
 <template>
   <div v-if="openPage === 1">
     <div v-if="SearchProductsArr.length">
-      <div class="row justify-center page-title">
-        {{ SearchProductsArr[0].title }}
-      </div>
-      <div v-if="SearchProductsArr.length">Barev Hayastan</div>
+      <search-products :productsArr="SearchProductsArr" />
     </div>
     <div v-if="!SearchProductsArr.length">
       <div class="col-12">
@@ -49,7 +46,8 @@
 </template>
 
 <script setup>
-import { ref, onMounted, computed } from "vue";
+import SearchProducts from "../components/SearchProducts.vue";
+import { ref, onMounted, computed, watch } from "vue";
 import axios from "axios";
 import { useStore } from "vuex";
 import { HOST } from "../providers";
@@ -63,7 +61,13 @@ onMounted(() => {
   console.log(SearchedText.value);
   SearchProductRequest(SearchedText.value);
 });
-
+watch(
+  () => SearchedText.value,
+  (text) => {
+    console.log(text);
+    SearchProductRequest(text);
+  }
+);
 async function SearchProductRequest(name) {
   let response = await axios.get(url + `/api/app/search?query=${name}`);
 
@@ -77,12 +81,7 @@ async function SearchProductRequest(name) {
 .eror {
   height: 100vh;
 }
-.page-title {
-  font-size: 60px;
-  color: black;
-  font-weight: bold;
-  margin: 80px 0px 0px;
-}
+
 .error-window {
   padding: 40px 85px;
   background: #ececec;
