@@ -27,12 +27,17 @@
           </div>
         </div>
       </div>
-      <div class="col-12" v-if="ClothingArr.length">
-        <slider-main-component :obj="Clothing" :slideArr="ClothingArr" />
-
-        <slider-main-component :obj="Shoes" :slideArr="ShoesArr" />
-        <slider-main-component :obj="Bags" :slideArr="BagsArr" />
-        <slider-main-component :obj="Bijouteri" :slideArr="BijouteriArr" />
+      <div class="col-12" v-if="ForWomenPageInfo.length">
+        <slider-main-component
+          v-for="item in ForWomenPageInfo"
+          :key="item.id"
+          :obj="{
+            type: 'for_women',
+            id: item.category_id,
+            title: item.category_title,
+          }"
+          :slideArr="item.products"
+        />
       </div>
     </div>
   </div>
@@ -42,66 +47,25 @@ import { ref, onMounted } from "vue";
 import axios from "axios";
 import { HOST } from "../providers";
 import SliderMainComponent from "../components/slider-main-component.vue";
+
 onMounted(() => {
   zapros();
 });
+
 let url = HOST;
 
-let Clothing = {};
-let Shoes = {};
-let ShoesArr = ref([]);
-let Bags = {};
-let BagsArr = ref([]);
-let Bijouteri = {};
 let ardenverjacaczapros = 0;
-let BijouteriArr = ref([]);
-let ClothingArr = ref([]);
+
+let ForWomenPageInfo = ref([]);
 
 async function zapros() {
+  console.log("bareeev");
   const response = await axios.get(
     url + "/api/app/products/root-category-products/for_women"
   );
-  let ForWomenPageInfo = response.data.data.items;
-  for (let i = 0; i < ForWomenPageInfo.length; i++) {
-    if (ForWomenPageInfo[i].category_title === "Одежда") {
-      cloth(ForWomenPageInfo[i]);
-    }
-    if (ForWomenPageInfo[i].category_title === "Обувь") {
-      shouse(ForWomenPageInfo[i]);
-    }
-    if (ForWomenPageInfo[i].category_title === "Сумки") {
-      bags(ForWomenPageInfo[i]);
-    }
-    if (ForWomenPageInfo[i].category_title === "Аксессуары") {
-      Accsesories(ForWomenPageInfo[i]);
-    }
-  }
+  ForWomenPageInfo.value = response.data.data.items;
+
   ardenverjacaczapros = 1;
-}
-
-function shouse(item) {
-  Shoes.id = item.category_id;
-  Shoes.title = item.category_title;
-
-  ShoesArr.value = item.products;
-}
-function bags(item) {
-  Bags.id = item.category_id;
-  Bags.title = item.category_title;
-
-  BagsArr.value = item.products;
-}
-function Accsesories(item) {
-  Bijouteri.id = item.category_id;
-  Bijouteri.title = item.category_title;
-
-  BijouteriArr.value = item.products;
-}
-function cloth(item) {
-  Clothing.id = item.category_id;
-  Clothing.title = item.category_title;
-
-  ClothingArr.value = item.products;
 }
 </script>
 

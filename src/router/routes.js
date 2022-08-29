@@ -25,6 +25,13 @@ const routes = [
     },
   },
   {
+    path: "/categories-page",
+    component: () => import("../pages/Categories-page.vue"),
+    meta: {
+      layout: "main-layout",
+    },
+  },
+  {
     path: "/ForWoman",
     component: () => import("../pages/ForWomanPage.vue"),
     meta: {

@@ -28,10 +28,16 @@
         </div>
       </div>
       <div class="col-12" v-if="RequestEnd === 1">
-        <slider-main-component :obj="Clothing" :slideArr="ClothingArr" />
-        <slider-main-component :obj="Shoes" :slideArr="ShoesArr" />
-        <slider-main-component :obj="Bags" :slideArr="BagsArr" />
-        <slider-main-component :obj="Bijouteri" :slideArr="BijouteriArr" />
+        <slider-main-component
+          v-for="item in ForManPageInfo"
+          :key="item.id"
+          :obj="{
+            type: 'for_men',
+            id: item.category_id,
+            title: item.category_title,
+          }"
+          :slideArr="item.products"
+        />
       </div>
     </div>
   </div>
@@ -50,61 +56,17 @@ onMounted(() => {
 });
 
 let url = HOST;
-let Clothing = {};
-let Shoes = {};
-let ShoesArr = ref([]);
-let Bags = {};
-let BagsArr = ref([]);
-let Bijouteri = {};
+
+let ForManPageInfo = ref([]);
 let RequestEnd = ref(1);
-let BijouteriArr = ref([]);
-let ClothingArr = ref([]);
 
 async function ForManRequest() {
   const response = await axios.get(
-    url + "/api/app/products/root-category-products/for_women"
+    url + "/api/app/products/root-category-products/for_men"
   );
-  let ForManPageInfo = response.data.data.items;
-  for (let i = 0; i < ForManPageInfo.length; i++) {
-    if (ForManPageInfo[i].category_title === "Одежда") {
-      cloth(ForManPageInfo[i]);
-    }
-    if (ForManPageInfo[i].category_title === "Обувь") {
-      shouse(ForManPageInfo[i]);
-    }
-    if (ForManPageInfo[i].category_title === "Сумки") {
-      bags(ForManPageInfo[i]);
-    }
-    if (ForManPageInfo[i].category_title === "Аксессуары") {
-      Accsesories(ForManPageInfo[i]);
-    }
-  }
+  ForManPageInfo.value = response.data.data.items;
+
   RequestEnd.value = 1;
-}
-
-function shouse(item) {
-  Shoes.id = item.category_id;
-  Shoes.title = item.category_title;
-
-  ShoesArr.value = item.products;
-}
-function bags(item) {
-  Bags.id = item.category_id;
-  Bags.title = item.category_title;
-
-  BagsArr.value = item.products;
-}
-function Accsesories(item) {
-  Bijouteri.id = item.category_id;
-  Bijouteri.title = item.category_title;
-
-  BijouteriArr.value = item.products;
-}
-function cloth(item) {
-  Clothing.id = item.category_id;
-  Clothing.title = item.category_title;
-
-  ClothingArr.value = item.products;
 }
 </script>
 

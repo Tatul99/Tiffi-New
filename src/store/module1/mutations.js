@@ -14,3 +14,11 @@ export function changeCategoriesId(state, payload) {
 export function chengeSerchedText(state, payload) {
   state.SearchedText = payload;
 }
+export function chengCategoriesPageType(state, payload) {
+  state.categoriesType = payload[0];
+  state.categoriesParentId = payload[1];
+  state.categoriesTitle = payload[2];
+}
+export function changeProductsArr(state, payload) {
+  state.productsArr = payload;
+}

@@ -221,8 +221,6 @@ let menuTitles = [
 ];
 
 function chengeType(type) {
-  console.log(1234);
-
   store.commit("module1/chengeMenuType", type);
   cuycTalMenu.value = true;
 }

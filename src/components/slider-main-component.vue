@@ -16,9 +16,13 @@
               </div>
               <img :src="obj.img" alt="" />
             </div>
-            <!-- <router-link @click="pushpath" to="/brand"> -->
-            <router-link v-if="obj.path" :to="obj.path"
-              ><div v-if="obj.path !== '/cloaths-info/'" class="row">
+
+            <router-link :to="obj.path ? obj.path : '/categories-page'"
+              ><div
+                @click="chengCategoriesPageType(obj.type, obj.id, obj.title)"
+                v-if="obj.path !== '/cloaths-info/'"
+                class="row"
+              >
                 <div class="seeMore q-pr-md">Увидеть Больше</div>
                 <img
                   src="../../public/forMan/left-vector.svg"
@@ -26,7 +30,6 @@
                   alt=""
                 /></div
             ></router-link>
-            <!-- </router-link> -->
           </div>
         </div>
       </div>
@@ -53,14 +56,6 @@
               class="row fit justify-start items-center q-gutter-xs q-col-gutter no-wrap slider-div"
             >
               <slider-component :arr="item" />
-              <!-- <q-img
-            v-for="info in item"
-            :key="info"
-            class="rounded-borders col-3 full-height"
-            :src="info.image"
-          ></q-img> -->
-              <!-- <div class="text">{{ info.text }}</div>
-          <div class="pr">{{ info.prise }}</div> -->
             </div>
           </q-carousel-slide>
 
@@ -112,6 +107,8 @@
 <script setup>
 import { onMounted, onUnmounted, ref } from "vue";
 import SliderComponent from "./slider-component.vue";
+import { useStore } from "vuex";
+let store = useStore();
 const props = defineProps({
   slideArr: Array,
   obj: Object,
@@ -151,6 +148,9 @@ function ChengearrLength() {
     }
   }
   arr.value.push(arr2);
+}
+function chengCategoriesPageType(type, id, title) {
+  store.commit("module1/chengCategoriesPageType", [type, id, title]);
 }
 </script>
 

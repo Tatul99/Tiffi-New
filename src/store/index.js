@@ -1,6 +1,7 @@
 import { store } from "quasar/wrappers";
 import { createStore } from "vuex";
 import module1 from "./module1";
+import createPersistedState from "vuex-persistedstate";
 
 // import example from './module-example'
 
@@ -19,6 +20,13 @@ export default store(function (/* { ssrContext } */) {
       // example
       module1,
     },
+    plugins: [
+      createPersistedState({
+        key: "tiffy_store",
+        paths: ["module1"],
+        storage: window.localStorage,
+      }),
+    ],
 
     // enable strict mode (adds overhead!)
     // for dev mode and --debug builds only

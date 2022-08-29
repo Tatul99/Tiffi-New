@@ -58,13 +58,11 @@ let SearchProductsArr = ref([]);
 let openPage = ref(0);
 let SearchedText = computed(() => store.state.module1.SearchedText);
 onMounted(() => {
-  console.log(SearchedText.value);
   SearchProductRequest(SearchedText.value);
 });
 watch(
   () => SearchedText.value,
   (text) => {
-    console.log(text);
     SearchProductRequest(text);
   }
 );
@@ -73,7 +71,6 @@ async function SearchProductRequest(name) {
 
   SearchProductsArr.value = response.data.data.items;
   openPage.value = 1;
-  console.log(SearchProductsArr.value);
 }
 </script>
 

@@ -69,4 +69,14 @@ function foo(id) {
   height: 522px;
   margin: 200px 37px 0px 0px;
 }
+@media all and (max-width: 450px) {
+  .items {
+    width: 42%;
+    margin: 100px 20px 0px 0px;
+    height: 350px;
+  }
+  .product-image {
+    height: 233px;
+  }
+}
 </style>
