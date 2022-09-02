@@ -25,7 +25,6 @@
                 </div>
               </div>
               <sub-tab class="col-6" />
-              <!-- <div class="childs" v-if="tesnelTesakner"></div> -->
             </div>
           </div>
         </div>
@@ -46,14 +45,16 @@ let tabId = null;
 
 let menuItems = ref([]);
 
-let active = computed(() => store.state.module1.active);
+let active = computed(() => store.state.module2.active);
 
 onMounted(() => {
   MenuCategorisRequest();
   active.value = 0;
 });
 function chengeInfo(id, i) {
+  console.log(id);
   store.commit("module1/changeCategoriesId", [id, i]);
+  store.commit("module2/changeCategoriesactive", [id, i]);
 }
 async function MenuCategorisRequest() {
   const response = await axios.get(url + "/api/app/categories");

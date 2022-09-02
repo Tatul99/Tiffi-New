@@ -1,6 +1,7 @@
 import { store } from "quasar/wrappers";
 import { createStore } from "vuex";
 import module1 from "./module1";
+import module2 from "./module2";
 import createPersistedState from "vuex-persistedstate";
 
 // import example from './module-example'
@@ -19,6 +20,7 @@ export default store(function (/* { ssrContext } */) {
     modules: {
       // example
       module1,
+      module2,
     },
     plugins: [
       createPersistedState({

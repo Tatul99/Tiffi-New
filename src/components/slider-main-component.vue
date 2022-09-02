@@ -18,17 +18,25 @@
             </div>
 
             <router-link :to="obj.path ? obj.path : '/categories-page'"
-              ><div
-                @click="chengCategoriesPageType(obj.type, obj.id, obj.title)"
-                v-if="obj.path !== '/cloaths-info/'"
-                class="row"
-              >
-                <div class="seeMore q-pr-md">Увидеть Больше</div>
-                <img
-                  src="../../public/forMan/left-vector.svg"
-                  class="cursor-pointer seeMoreIcon"
-                  alt=""
-                /></div
+              ><div v-if="obj.path !== '/cloaths-info/'" class="row">
+                <div
+                  @click="
+                    chengCategoriesPageType(
+                      obj.type,
+                      obj.id,
+                      obj.title,
+                      obj.subCategory
+                    )
+                  "
+                  class="row"
+                >
+                  <div class="seeMore q-pr-md">Увидеть Больше</div>
+                  <img
+                    src="../../public/forMan/left-vector.svg"
+                    class="cursor-pointer seeMoreIcon"
+                    alt=""
+                  />
+                </div></div
             ></router-link>
           </div>
         </div>
@@ -149,8 +157,13 @@ function ChengearrLength() {
   }
   arr.value.push(arr2);
 }
-function chengCategoriesPageType(type, id, title) {
-  store.commit("module1/chengCategoriesPageType", [type, id, title]);
+function chengCategoriesPageType(type, id, title, subCategory) {
+  store.commit("module1/chengCategoriesPageType", [
+    type,
+    id,
+    title,
+    subCategory,
+  ]);
 }
 </script>
 

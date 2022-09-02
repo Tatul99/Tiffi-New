@@ -59,7 +59,6 @@ let ardenverjacaczapros = 0;
 let ForWomenPageInfo = ref([]);
 
 async function zapros() {
-  console.log("bareeev");
   const response = await axios.get(
     url + "/api/app/products/root-category-products/for_women"
   );

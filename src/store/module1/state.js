@@ -6,6 +6,9 @@ export default function () {
     state: 0,
     SearchedText: "",
     categoriesType: "",
+    subCategory: false,
+    activeMenuItem: 0,
+
     productsArr: [],
     categoriesTitle: "",
     categoriesParentId: 1,

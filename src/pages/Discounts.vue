@@ -22,12 +22,14 @@ let ForManArr = ref([]);
 let ForWomenArr = ref([]);
 let RequestEnd = ref(0);
 let ForMan = {
+  type: "for_men",
   miniTitle: "для ",
   title: " Мужчин",
   path: "/ForMan",
   id: 1,
 };
 let ForWoman = {
+  type: "for_women",
   miniTitle: "для ",
   title: "Женщин",
   path: "/ForWoman",

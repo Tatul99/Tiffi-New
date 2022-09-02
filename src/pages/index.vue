@@ -9,7 +9,7 @@
       <new-colection :obj="NewColectionTextObject" :arr="NewColectionArr" />
     </div>
     <div v-if="compilationArr.length">
-      <slider-main-component :obj="ForMan" :slideArr="compilationArr" />
+      <slider-main-component :obj="ForMan" :slideArr="ForManArr" />
     </div>
     <div v-if="ForWomenArr.length">
       <slider-main-component :obj="ForWoman" :slideArr="ForWomenArr" />
@@ -36,18 +36,23 @@ let ForWomenArr = ref([]);
 
 let url = HOST;
 let ForMan = {
+  type: "for_men",
   miniTitle: "для ",
   title: " Мужчин",
   path: "/ForMan",
   id: 1,
 };
+let type = computed(() => store.state.module1.categoriesType);
 let ForWoman = {
+  type: "for_women",
   miniTitle: "для ",
   title: "Женщин",
   path: "/ForWoman",
   id: 2,
 };
 onMounted(() => {
+  type.value = "";
+
   zapros();
   zaprosforNewColection();
   zaprosForManComponent();

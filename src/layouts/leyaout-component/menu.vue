@@ -57,11 +57,9 @@
                             <router-link :to="item.path">
                               <div
                                 @click="
-                                  item.type !== undefined
-                                    ? chengeType(item.type)
-                                    : (cuycTalMenu = false)
+                                  chengeTypeResponsive(item.type, item.path, i)
                                 "
-                                :class="active === item.path ? 'active' : ''"
+                                :class="active === i ? 'active' : ''"
                               >
                                 {{ item.name }}
                               </div></router-link
@@ -91,7 +89,6 @@
           <div class="col-8 menu-line">
             <div class="menu row justify-around">
               <div
-                @click="active = i"
                 class="items cursor-pointer text-weight-bold"
                 v-for="(item, i) in menuTitles"
                 :key="item"
@@ -99,10 +96,13 @@
               >
                 <router-link :to="item.path">
                   <div
+                    @click="chengeMenuActive(i, item.path)"
                     @mouseover="
-                      item.type !== undefined ? chengeType(item.type) : ''
+                      item.type !== undefined
+                        ? chengeType(item.type, item.path, active)
+                        : ''
                     "
-                    :class="active === item.path ? 'active' : ''"
+                    :class="active === i ? 'active' : ''"
                   >
                     {{ item.name }}
                   </div></router-link
@@ -156,7 +156,7 @@
 </template>
 
 <script setup>
-import { computed, ref, onMounted } from "vue";
+import { computed, ref, onMounted, watch } from "vue";
 import { useRoute } from "vue-router";
 import { useStore } from "vuex";
 import axios from "axios";
@@ -166,23 +166,53 @@ import UnderMenuMobile from "../../components/under-menu-mobile.vue";
 let url = HOST;
 let store = useStore();
 let Route = useRoute();
-let active = computed(() => {
-  let path = Route.path;
-  return path;
+let path = Route.path;
+
+watch(path, () => {
+  console.log(path);
+  store.commit("module1/chengMenuCategoriesPageType", "");
 });
+
+let subActive = ref("");
+let type = computed(() => store.state.module1.categoriesType);
+let active = computed(() => store.state.module1.activeMenuItem);
+
 onMounted(() => {
+  chengeTypeResponsive(
+    menuTitles[active.value].type,
+    menuTitles[active.value].type,
+    active.value
+  );
   if (Route.path == "/ForMan" || Route.path == "/Aboute") {
     cuycTalMenu.value = true;
   }
 });
+watch(
+  () => type.value,
+  (type) => {
+    console.log(type);
+
+    menuTitles.forEach((el, i) => {
+      if (el.type === type) {
+        store.commit("module1/chengeActiveMenu", i);
+      }
+    });
+  }
+);
 let bool = ref(false);
 let openMenu = ref(false);
-let active2 = 0;
+let active2 = ref(false);
+
 let cuycTalMenu = ref(false);
 let searchInputValue = ref("");
 let responsiveMenuiBool = false;
 let MenuType = ref("");
-
+function chengeMenuActive(index, path) {
+  if (path === "/" || path === "/New" || path === "/Discounts") {
+    store.commit("module1/chengeMenuActiveType", path);
+  }
+  store.commit("module1/chengeActiveMenu", index);
+}
 let menuTitles = [
   {
     id: 1,
@@ -205,13 +235,13 @@ let menuTitles = [
     id: 4,
     name: "Новинки",
     path: "/New",
-    type: "for_women",
+    // type: "for_women",
   },
   {
     id: 5,
     name: "Скидки",
     path: "/Discounts",
-    type: "for_men",
+    // type: "for_men",
   },
   {
     id: 6,
@@ -220,27 +250,29 @@ let menuTitles = [
   },
 ];
 
-function chengeType(type) {
+function chengeTypeResponsive(type, path, index) {
   store.commit("module1/chengeMenuType", type);
-  cuycTalMenu.value = true;
+  store.commit("module1/chengeActiveMenu", index);
+  store.commit("module2/changeCategoriesactive", [1, 0]);
+  if (type === undefined) {
+    cuycTalMenu.value = false;
+  } else cuycTalMenu.value = true;
+  chengeMenuActive(index, path);
+  subActive.value = "";
 }
-
-function searchProduct() {}
+function chengeType(type, path, index) {
+  store.commit("module1/chengeMenuType", type);
+  store.commit("module1/chengeActiveMenu", index);
+  store.commit("module2/changeCategoriesactive", [1, 0]);
+  cuycTalMenu.value = true;
+  subActive.value = "";
+}
 
 let SearchProductsArr = ref([]);
-function ChangeresponsiveMenuiBool(i, item) {
-  this.active2 = i;
-  if (item.type) {
-    this.responsiveMenuiBool = true;
-  } else {
-    this.responsiveMenuiBool = false;
-    this.active = i;
-  }
-}
+
 function bool1() {
   bool.value = !bool.value;
   if (searchInputValue.value.length) {
-    // SearchProductRequest(searchInputValue.value);
     store.commit("module1/chengeSerchedText", searchInputValue.value);
   }
 }

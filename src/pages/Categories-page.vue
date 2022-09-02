@@ -3,19 +3,20 @@
     <div class="row justify-center">
       <div class="page-title">{{ Title }}</div>
 
-      <div v-if="!productsArr.length" class="col-12">
+      <div v-if="!subCategory" class="col-12">
         <slider-main-component
           v-for="item in requestAnswer"
           :key="item.id"
           :obj="{
-            type: 'for_women',
+            type: type,
             id: item.category_id,
             title: item.category_title,
+            subCategory: 'product',
           }"
           :slideArr="item.products"
         />
       </div>
-      <div v-if="productsArr.length" class="col-12">
+      <div v-if="subCategory" class="col-12">
         <div class="row justify-end">
           <div class="col-11">
             <div class="row justify-between">
@@ -57,6 +58,7 @@ let store = useStore();
 let route = useRoute();
 let RequestEnd = ref(0);
 let requestAnswer = ref([]);
+let subCategory = computed(() => store.state.module1.subCategory);
 let productsArr = computed(() => store.state.module1.productsArr);
 let type = computed(() => store.state.module1.categoriesType);
 let parentId = computed(() => store.state.module1.categoriesParentId);
@@ -78,6 +80,9 @@ async function productCategories(type, parentId) {
   requestAnswer.value = response.data.data.items;
 
   RequestEnd.value = 1;
+}
+function foo(id) {
+  store.commit("module1/chengeId", id);
 }
 function FilterCategores(arr) {
   arr.forEach((el) => {
@@ -109,6 +114,9 @@ function FilterCategores(arr) {
   width: 30%;
   height: 522px;
   margin: 200px 37px 0px 0px;
+}
+.item {
+  margin: 20px 40px 200px 0px;
 }
 @media all and (max-width: 450px) {
   .items {

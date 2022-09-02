@@ -30,6 +30,7 @@ let store = useStore();
 let active = ref(0);
 let categoriesId = computed(() => store.state.module1.categoriesId);
 let type = computed(() => store.state.module1.type);
+let active2 = computed(() => store.state.module2.active);
 
 watch(
   () => categoriesId.value,
@@ -38,7 +39,11 @@ watch(
   }
 );
 
-onMounted(() => {});
+onMounted(() => {
+  if (active2.value === 0) {
+    SubCategoriesRequest();
+  }
+});
 let url = HOST;
 watch(
   () => type.value,
