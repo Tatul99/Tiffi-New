@@ -4,7 +4,7 @@
       <div class="col-10">
         <div class="subTitle q-mb-xl">{{ name }}</div>
         <div class="subMenuContent row justify-between">
-          <div class="col-4 tayps">
+          <div class="col-4 tayps text-right">
             <div
               class="SubMenuTitle"
               :class="active === i ? 'active' : ''"
@@ -23,7 +23,7 @@
               </div>
             </div>
           </div>
-          <div class="col-4 brendsContent">
+          <div class="col-4 brendsContent q-mt-xl">
             <div class="Brend" v-for="brend in brends" :key="brend.id">
               {{ brend.title }}
             </div>

@@ -23,6 +23,15 @@
                   <div class="row justify-center">
                     <div class="col-12 background">
                       <div class="row justify-center">
+                        <div class="col-2 row items-end justify-end">
+                          <img
+                            v-if="!hiddenArrowLeftBool"
+                            @click="chengeOpenMenu()"
+                            src="/icons/arrow-left.png"
+                            alt="arrow-left"
+                            class="arrow-left"
+                          />
+                        </div>
                         <div class="col-6">
                           <div class="row justify-end">
                             <img
@@ -35,9 +44,10 @@
                         <div class="col-4 row items-end justify-center">
                           <div class="col-8 row justify-end items-end">
                             <q-icon
+                              style="font-size: 32px"
                               @click="openMenu = false"
                               name="close"
-                              class="cursor-pointer close q-mb-lg"
+                              class="cursor-pointer close q-mt-xl"
                             ></q-icon>
                           </div>
                         </div>
@@ -163,13 +173,13 @@ import axios from "axios";
 import { HOST } from "../../providers";
 import UnderMenu from "../../components/underMenu.vue";
 import UnderMenuMobile from "../../components/under-menu-mobile.vue";
+import module1 from "src/store/module1";
 let url = HOST;
 let store = useStore();
 let Route = useRoute();
 let path = Route.path;
 
 watch(path, () => {
-  console.log(path);
   store.commit("module1/chengMenuCategoriesPageType", "");
 });
 
@@ -178,6 +188,7 @@ let type = computed(() => store.state.module1.categoriesType);
 let active = computed(() => store.state.module1.activeMenuItem);
 
 onMounted(() => {
+  console.log(hiddenArrowLeftBool.value);
   chengeTypeResponsive(
     menuTitles[active.value].type,
     menuTitles[active.value].type,
@@ -190,8 +201,6 @@ onMounted(() => {
 watch(
   () => type.value,
   (type) => {
-    console.log(type);
-
     menuTitles.forEach((el, i) => {
       if (el.type === type) {
         store.commit("module1/chengeActiveMenu", i);
@@ -202,11 +211,14 @@ watch(
 let bool = ref(false);
 let openMenu = ref(false);
 let active2 = ref(false);
-
+let chengeOpenMenuBool = ref(0);
 let cuycTalMenu = ref(false);
 let searchInputValue = ref("");
 let responsiveMenuiBool = false;
 let MenuType = ref("");
+let hiddenArrowLeftBool = computed(
+  () => store.state.module2.hiddenArrowLeftBool
+);
 function chengeMenuActive(index, path) {
   if (path === "/" || path === "/New" || path === "/Discounts") {
     store.commit("module1/chengeMenuActiveType", path);
@@ -249,7 +261,9 @@ let menuTitles = [
     path: "/Aboute",
   },
 ];
-
+function chengeOpenMenu() {
+  store.commit("module2/chengeOpenMenu");
+}
 function chengeTypeResponsive(type, path, index) {
   store.commit("module1/chengeMenuType", type);
   store.commit("module1/chengeActiveMenu", index);
@@ -267,8 +281,6 @@ function chengeType(type, path, index) {
   cuycTalMenu.value = true;
   subActive.value = "";
 }
-
-let SearchProductsArr = ref([]);
 
 function bool1() {
   bool.value = !bool.value;
@@ -398,6 +410,10 @@ a {
   }
 }
 @media all and (max-width: 450px) {
+  .arrow-left {
+    width: 32px;
+    height: 25px;
+  }
   .line {
     width: 27px;
     margin-bottom: 4px;

@@ -42,7 +42,7 @@ let ForMan = {
   path: "/ForMan",
   id: 1,
 };
-let type = computed(() => store.state.module1.categoriesType);
+
 let ForWoman = {
   type: "for_women",
   miniTitle: "для ",
@@ -51,8 +51,6 @@ let ForWoman = {
   id: 2,
 };
 onMounted(() => {
-  type.value = "";
-
   zapros();
   zaprosforNewColection();
   zaprosForManComponent();

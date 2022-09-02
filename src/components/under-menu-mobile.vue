@@ -89,11 +89,13 @@
 
 <script setup>
 import SubTabMenu from "./SubTabMenu.vue";
-import { ref, onMounted, computed } from "vue";
+import { ref, onMounted, computed, watch } from "vue";
 import axios from "axios";
+import { useStore } from "vuex";
 import { HOST } from "../providers";
 import { useRoute } from "vue-router";
 let Route = useRoute();
+let store = useStore();
 let activePage = ref(0);
 let activePageTitile = ref("");
 let activePageName = ref("");
@@ -104,9 +106,24 @@ let bool = ref(null);
 let active = computed(() => Route.path);
 let type = "";
 let mobileMenuArr = ref([]);
+let chengeOpenMenu = computed(() => store.state.module2.chengeOpenMenu);
+
 onMounted(() => {
   MenuCategorisRequest();
   getType();
+});
+
+watch(
+  () => chengeOpenMenu.value,
+  () => {
+    closeMenu();
+  }
+);
+watch(activePage, () => {
+  if (activePage.value > 0) {
+    console.log(678);
+    store.commit("module2/hiddenArrowLeft", false);
+  } else store.commit("module2/hiddenArrowLeft", true);
 });
 let subTitles = ref(null);
 let menuTitles = [
@@ -145,6 +162,11 @@ let menuTitles = [
     path: "/Aboute",
   },
 ];
+function closeMenu() {
+  if (activePage.value > 0) {
+    activePage.value = 0;
+  }
+}
 function getType() {
   menuTitles.forEach((element) => {
     if (element.path === active.value) {
