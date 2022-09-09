@@ -22,11 +22,16 @@
             <div class="row justify-between">
               <div
                 class="col-6 text-left items"
-                v-for="item in menuTitles"
+                v-for="(item, i) in menuTitles"
                 :key="item"
               >
                 <router-link :to="item.path"
-                  ><div class="name">{{ item.name }}</div></router-link
+                  ><div
+                    class="name"
+                    @click="chengeTypeResponsive(item.type, item.path, i)"
+                  >
+                    {{ item.name }}
+                  </div></router-link
                 >
               </div>
             </div>
@@ -94,33 +99,58 @@
   </div>
 </template>
 <script setup>
+import { ref, onMounted, computed } from "vue";
+import { useStore } from "vuex";
+let store = useStore();
+let active = computed(() => store.state.module1.activeMenuItem);
+onMounted(() => {
+  chengeTypeResponsive(
+    menuTitles[active.value].type,
+    menuTitles[active.value].type,
+    active.value
+  );
+});
 let menuTitles = [
   {
+    id: 1,
     name: "Главная",
     path: "/",
   },
   {
-    name: "Новинки",
-    path: "/New",
-  },
-  {
+    id: 2,
     name: "для Женщин",
     path: "/ForWoman",
+    type: "for_women",
   },
   {
+    id: 3,
+    name: "для Мужчин",
+    path: "/ForMan",
+    type: "for_men",
+  },
+  {
+    id: 4,
+    name: "Новинки",
+    path: "/New",
+    // type: "for_women",
+  },
+  {
+    id: 5,
     name: "Скидки",
     path: "/Discounts",
+    // type: "for_men",
   },
   {
-    name: "для Мужчин",
-    path: "/forMan",
-  },
-
-  {
+    id: 6,
     name: "О Нас",
     path: "/Aboute",
   },
 ];
+function chengeTypeResponsive(type, path, index) {
+  store.commit("module1/chengeMenuType", type);
+  store.commit("module1/chengeActiveMenu", index);
+  store.commit("module2/changeCategoriesactive", [1, 0]);
+}
 </script>
 
 <style scoped>

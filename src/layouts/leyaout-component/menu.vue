@@ -188,7 +188,6 @@ let type = computed(() => store.state.module1.categoriesType);
 let active = computed(() => store.state.module1.activeMenuItem);
 
 onMounted(() => {
-  console.log(hiddenArrowLeftBool.value);
   chengeTypeResponsive(
     menuTitles[active.value].type,
     menuTitles[active.value].type,

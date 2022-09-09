@@ -52,7 +52,6 @@
             :active="i"
             :title="i.price.toString()"
             disable
-            @click="log(url)"
             :image="url + '/' + i.image"
           >
             <template v-slot:content>
@@ -105,6 +104,7 @@ onMounted(() => {
 
   if (window.innerWidth < 455 && arr.length <= 9) teqvoxSlide.value = 3.5;
 });
+
 onUnmounted(() => {
   window.removeEventListener("resize", getDimensions);
 });

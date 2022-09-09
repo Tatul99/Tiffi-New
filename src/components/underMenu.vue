@@ -52,7 +52,6 @@ onMounted(() => {
   active.value = 0;
 });
 function chengeInfo(id, i) {
-  console.log(id);
   store.commit("module1/changeCategoriesId", [id, i]);
   store.commit("module2/changeCategoriesactive", [id, i]);
 }

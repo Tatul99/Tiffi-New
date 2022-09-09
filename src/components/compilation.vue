@@ -100,7 +100,6 @@ const props = defineProps({
 let slideToShow = 4;
 let width = document.documentElement.clientWidth;
 onMounted(() => {
-  // console.log(props.slideArr);
   window.addEventListener("resize", getDimensions());
   if (props.slideArr.length) {
     foo();
@@ -115,10 +114,6 @@ function getDimensions() {
   if (window.innerWidth < 1041) slideToShow = 3;
   if (window.innerWidth > 1040) slideToShow = 4;
   if (window.innerWidth < 455) slideToShow = 2;
-  // if (window.innerWidth < 1040) this.slideToShow = 3;
-  // else if (window.innerWidth > 1040) this.slideToShow = 4;
-
-  // if (this.width + 15 <= 500) this.slideToShow = 1;
 }
 let filtrArr = ref([]);
 

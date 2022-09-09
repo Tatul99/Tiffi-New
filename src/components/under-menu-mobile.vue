@@ -121,7 +121,6 @@ watch(
 );
 watch(activePage, () => {
   if (activePage.value > 0) {
-    console.log(678);
     store.commit("module2/hiddenArrowLeft", false);
   } else store.commit("module2/hiddenArrowLeft", true);
 });

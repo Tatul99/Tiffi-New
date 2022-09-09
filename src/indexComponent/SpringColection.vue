@@ -19,6 +19,7 @@
                   </div>
 
                   <img
+                    @click="GoToTop()"
                     src="../../public/index/left.svg"
                     alt=""
                     class="q-ml-xl cursor-pointer more-icon col-2"
@@ -44,7 +45,27 @@
   </div>
 </template>
 
-<script setup></script>
+<script setup>
+import Compilation from "../components/compilation.vue";
+import { ref, onMounted } from "vue";
+let scrollX = ref(0);
+let goTop = ref(1050);
+onMounted(() => {
+  window.addEventListener("scroll", handleScroll);
+});
+function handleScroll() {
+  scrollX.value = window.scrollX;
+  if (scrollX >= 1050) {
+    goTop.value = 1050;
+  } else goTop.value = 1350;
+}
+function GoToTop() {
+  window.scrollTo({
+    top: goTop.value,
+    behavior: "smooth",
+  });
+}
+</script>
 
 <style scoped>
 .colection-container {
