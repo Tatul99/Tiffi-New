@@ -166,7 +166,6 @@ function chengeTypeResponsive(type, path, index) {
   height: 2px;
 
   background-color: #fff;
-  /* border: 2px solid #fff; */
 }
 .contant {
   margin-top: 126px;

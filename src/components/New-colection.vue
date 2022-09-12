@@ -77,7 +77,6 @@
       </div>
     </div>
   </div>
-  <!-- <div></div> -->
 </template>
 <script setup>
 import { VueperSlides, VueperSlide } from "vueperslides";

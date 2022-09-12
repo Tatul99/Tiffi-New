@@ -78,10 +78,6 @@ async function ForManRequest() {
   font-size: 70px;
 }
 @media all and (max-width: 1024px) {
-  /* .video {
-    width: 874px;
-    height: 709px;
-  } */
 }
 @media all and (max-width: 455px) {
   .mini-title-page {

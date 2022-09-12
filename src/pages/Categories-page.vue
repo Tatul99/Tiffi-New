@@ -69,6 +69,7 @@ onMounted(() => {
 watch(
   () => Title.value,
   (title) => {
+    productCategories(type.value, parentId.value);
     FilterCategores(requestAnswer.value);
   }
 );

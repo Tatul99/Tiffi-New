@@ -13,13 +13,12 @@
                   Есть много вариантов Lorem Ipsum, но большинство из них имеет
                   не всегда приемлемые модификации.
                 </div>
-                <div class="more row q-mt-lg">
+                <div @click="GoTo" class="more row q-mt-lg">
                   <div class="row items-center text-weight-bold">
                     Увидеть Больше
                   </div>
 
                   <img
-                    @click="GoToTop()"
                     src="../../public/index/left.svg"
                     alt=""
                     class="q-ml-xl cursor-pointer more-icon col-2"
@@ -28,11 +27,9 @@
               </div>
             </div>
           </div>
-          <div class="col-11 col-sm-12 col-md-6">
+          <div class="col-11 col-sm-12 col-md-6" style="height: 703px">
             <video
-              width="100%"
-              height="703px"
-              style="object-fit: fill"
+              style="object-fit: fill; width: 100%; height: 100%"
               autoplay
               loop
               muted
@@ -46,20 +43,20 @@
 </template>
 
 <script setup>
-import Compilation from "../components/compilation.vue";
 import { ref, onMounted } from "vue";
-let scrollX = ref(0);
+let scrollY = ref(0);
 let goTop = ref(1050);
 onMounted(() => {
   window.addEventListener("scroll", handleScroll);
 });
 function handleScroll() {
-  scrollX.value = window.scrollX;
-  if (scrollX >= 1050) {
+  scrollY.value = window.scrollY;
+
+  if (scrollY.value > 1050) {
     goTop.value = 1050;
-  } else goTop.value = 1350;
+  } else goTop.value = 1200;
 }
-function GoToTop() {
+function GoTo() {
   window.scrollTo({
     top: goTop.value,
     behavior: "smooth",

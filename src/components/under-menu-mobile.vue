@@ -15,7 +15,9 @@
                   <router-link :to="item.path">
                     <div
                       @click="
-                        item.type !== undefined ? chengeType(item.type) : ''
+                        item.type !== undefined
+                          ? chengeType(item.type, item.path)
+                          : ''
                       "
                       :class="active === item.path ? 'active' : ''"
                     >
@@ -53,21 +55,25 @@
               <div class="col-10">
                 <div class="row justify-center">
                   <div class="col-8" v-for="title in subTitles" :key="title.id">
-                    <div
-                      class="row justify-between items-center sub-title"
-                      @click="chengeactivepage(title)"
-                    >
-                      <div>{{ title.title }}</div>
-                      <q-icon
-                        :class="
-                          item.name == 'Главная' || item.name == 'О Нас'
-                            ? 'cuycchtalIcon'
-                            : ''
+                    <router-link to="/categories-page"
+                      ><div
+                        class="row justify-between items-center sub-title"
+                        @click="
+                          chengeactivepage(title),
+                            chengCategoriesPageType(type, title.id, title.title)
                         "
-                        class="icons"
-                        :name="'keyboard_arrow_up'"
-                      ></q-icon>
-                    </div>
+                      >
+                        <div>{{ title.title }}</div>
+                        <q-icon
+                          :class="
+                            item.name == 'Главная' || item.name == 'О Нас'
+                              ? 'cuycchtalIcon'
+                              : ''
+                          "
+                          class="icons"
+                          :name="'keyboard_arrow_up'"
+                        ></q-icon></div
+                    ></router-link>
                   </div>
                 </div>
               </div>
@@ -104,7 +110,8 @@ let url = HOST;
 let responsiveMenuiBool = ref(false);
 let bool = ref(null);
 let active = computed(() => Route.path);
-let type = "";
+let type = computed(() => store.state.module1.type);
+
 let mobileMenuArr = ref([]);
 let chengeOpenMenu = computed(() => store.state.module2.chengeOpenMenu);
 
@@ -161,28 +168,33 @@ let menuTitles = [
     path: "/Aboute",
   },
 ];
+function chengeType(type) {
+  store.commit("module1/chengeMenuType", type);
+}
 function closeMenu() {
   if (activePage.value > 0) {
     activePage.value = 0;
   }
 }
+function chengCategoriesPageType(type, id, title) {
+  console.log(type);
+  store.commit("module1/chengCategoriesPageType", [type, id, title]);
+}
 function getType() {
   menuTitles.forEach((element) => {
     if (element.path === active.value) {
-      type = element.type;
+      type.value = element.type;
     }
   });
 }
-function chengeType(ElementType) {
-  type = ElementType;
-}
+
 async function MenuCategorisRequest() {
   const response = await axios.get(url + "/api/app/categories");
   subTitles.value = response.data.data.items;
 }
 async function chengeactivepage(title) {
   const response = await axios.get(
-    url + `/api/app/sub_categories/${title.id}/${type}`
+    url + `/api/app/sub_categories/${title.id}/${type.value}`
   );
   mobileMenuArr.value = response.data.data.items;
 

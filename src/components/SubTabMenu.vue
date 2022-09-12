@@ -50,10 +50,12 @@ onMounted(() => {
 function chengeActive(i, id, items) {
   active.value = i;
   let BrendsObj = [];
-  if (items.children) {
-    BrendsObj = items.children;
+  if (items !== undefined) {
+    if (items.children) {
+      BrendsObj = items.children;
+    }
+    brends.value = items.children;
   }
-  brends.value = items.children;
 }
 </script>
 

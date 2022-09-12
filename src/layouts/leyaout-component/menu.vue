@@ -55,7 +55,6 @@
                     </div>
 
                     <div class="col-12 background">
-                      <!-- mobile-responsive menu -->
                       <under-menu-mobile />
                       <div class="col-8 gt-xs q-mt-xl responsive-menu-line">
                         <div class="menu row justify-around">
@@ -95,7 +94,6 @@
               </div></div
           ></q-dialog>
 
-          <!-- <div class="opacity lt-md" v-if="responsiveMenuiBool"></div> -->
           <div class="col-8 menu-line">
             <div class="menu row justify-around">
               <div
@@ -332,16 +330,7 @@ a {
   height: 46px;
   margin-top: 85px;
 }
-/* .active:after {
-  content: "";
-  width: 100%;
-  height: 5px;
-  position: absolute;
-  background-color: #000000;
-  bottom: -67%;
-  left: 0px;
-  border-radius: 5px 5px 0px 0px;
-} */
+
 .search-input {
   border-radius: 18px;
   border: 1px solid;
@@ -381,8 +370,7 @@ a {
   }
   .menu-content {
     border-bottom: unset;
-    /* display: flex; */
-    /* flex-direction: reverse; */
+
     justify-content: space-between;
   }
   .menu-responsive-line {
@@ -425,7 +413,6 @@ a {
   .logo-mec1 {
     width: 117px;
     height: 28px;
-    /* margin-top: 85px; */
   }
   .logo {
     width: 117px !important;

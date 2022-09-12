@@ -78,11 +78,6 @@ async function zaprosforNewColection() {
 </script>
 
 <style scoped>
-/* div {
-  height: 130vh;
-  width: 100vw;
-  background: red;
-} */
 .scroll {
   background-image: url("../../public/icons/btn-Up.png");
   background-repeat: no-repeat;

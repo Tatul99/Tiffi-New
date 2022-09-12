@@ -7,22 +7,27 @@
           <div class="col-10">
             <div class="row justify-start">
               <div class="column col-3">
-                <div
-                  class="items row justify-between"
-                  v-for="(item, i) in menuItems"
-                  :key="item.id"
-                  @click="chengeInfo(item.id, i)"
-                  :class="i === active ? 'active' : ''"
-                >
-                  <div>{{ item.title }}</div>
-                  <q-icon
-                    :name="
-                      i === active
-                        ? 'keyboard_arrow_right'
-                        : 'keyboard_arrow_up'
+                <router-link to="/categories-page">
+                  <div
+                    class="items row justify-between"
+                    v-for="(item, i) in menuItems"
+                    :key="item.id"
+                    @click="
+                      chengeInfo(item.id, i),
+                        chengCategoriesPageType(item.id, item.title)
                     "
-                  ></q-icon>
-                </div>
+                    :class="i === active ? 'active' : ''"
+                  >
+                    <div>{{ item.title }}</div>
+                    <q-icon
+                      :name="
+                        i === active
+                          ? 'keyboard_arrow_right'
+                          : 'keyboard_arrow_up'
+                      "
+                    ></q-icon>
+                  </div>
+                </router-link>
               </div>
               <sub-tab class="col-6" />
             </div>
@@ -44,7 +49,7 @@ let store = useStore();
 let tabId = null;
 
 let menuItems = ref([]);
-
+let type = computed(() => store.state.module1.type);
 let active = computed(() => store.state.module2.active);
 
 onMounted(() => {
@@ -58,6 +63,9 @@ function chengeInfo(id, i) {
 async function MenuCategorisRequest() {
   const response = await axios.get(url + "/api/app/categories");
   menuItems.value = response.data.data.items;
+}
+function chengCategoriesPageType(id, title) {
+  store.commit("module1/chengCategoriesPageType", [type.value, id, title]);
 }
 </script>
 
