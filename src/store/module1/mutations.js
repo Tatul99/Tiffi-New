@@ -1,6 +1,7 @@
 // export function someMutation(/* state */) {}
 export function chengeId(state, payload) {
-  state.id = payload;
+  state.id = payload[0];
+  state.categoriesType = payload[1];
 }
 export function chengeActiveMenu(state, payload) {
   state.activeMenuItem = payload;

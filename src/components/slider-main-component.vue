@@ -63,7 +63,7 @@
             <div
               class="row fit justify-start items-center q-gutter-xs q-col-gutter no-wrap slider-div"
             >
-              <slider-component :arr="item" />
+              <slider-component :arr="item" :type="obj.type" />
             </div>
           </q-carousel-slide>
 

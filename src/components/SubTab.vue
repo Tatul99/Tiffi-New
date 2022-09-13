@@ -1,18 +1,23 @@
 <template>
   <div class="main-div">
-    <div
-      v-for="(item, i) in arr"
-      @click="change(i, item.id, item.children)"
-      :key="item.id"
-      class="title"
-    >
-      <div v-if="item.title" class="row items-center">
-        <div :class="i === active ? 'active' : ''">{{ item.title }}</div>
-        <q-icon
-          :name="i === active ? 'keyboard_arrow_right' : 'keyboard_arrow_up'"
-        ></q-icon>
+    <router-link to="/categories-page">
+      <div
+        v-for="(item, i) in arr"
+        @click="
+          change(i, item.id, item.children),
+            chengCategoriesPageType(categoriesId, item.title)
+        "
+        :key="item.id"
+        class="title"
+      >
+        <div v-if="item.title" class="row items-center">
+          <div :class="i === active ? 'active' : ''">{{ item.title }}</div>
+          <q-icon
+            :name="i === active ? 'keyboard_arrow_right' : 'keyboard_arrow_up'"
+          ></q-icon>
+        </div>
       </div>
-    </div>
+    </router-link>
   </div>
   <brends-tab :arr="BrendsArr" />
 </template>
@@ -59,6 +64,14 @@ async function SubCategoriesRequest() {
   );
 
   arr.value = response.data.data.items;
+}
+function chengCategoriesPageType(id, title) {
+  store.commit("module1/chengCategoriesPageType", [
+    type.value,
+    id,
+    title,
+    "products",
+  ]);
 }
 function change(i, id, children) {
   active.value = i;

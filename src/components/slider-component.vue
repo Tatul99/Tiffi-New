@@ -10,7 +10,7 @@
     >
       <router-link :to="'/cloaths-info/' + img.id">
         <q-img
-          @click="foo(img.id)"
+          @click="foo(img.id, type)"
           class="rounded-borders col-1 col-md-2 row images items-end"
           :src="url + '/' + img.image"
         >
@@ -34,9 +34,10 @@ const url = HOST;
 
 const props = defineProps({
   arr: Object,
+  type: String,
 });
-function foo(id) {
-  store.commit("module1/chengeId", id);
+function foo(id, type) {
+  store.commit("module1/chengeId", [id, type]);
 }
 </script>
 

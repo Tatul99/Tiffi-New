@@ -16,42 +16,20 @@
           :slideArr="item.products"
         />
       </div>
-      <div v-if="subCategory" class="col-12">
-        <div class="row justify-end">
-          <div class="col-11">
-            <div class="row justify-between">
-              <div
-                class="item col-3"
-                v-for="item in productsArr"
-                :key="item.id"
-              >
-                <router-link :to="'/cloaths-info/' + item.id">
-                  <img
-                    @click="foo(item.id)"
-                    class="col-12 product-image"
-                    :src="url + '/' + item.image"
-                    alt="products image"
-                  />
-                  <div class="col-12 product-title">
-                    {{ item.title }}
-                  </div>
-                  <div class="col-12 product-price">${{ item.price }}</div>
-                </router-link>
-              </div>
-            </div>
-          </div>
-        </div>
+      <div v-if="subCategory">
+        <categories-items :productsArr="productsArr" />
       </div>
     </div>
   </div>
 </template>
 
 <script setup>
+import CategoriesItems from "../components/categories-items.vue";
 import { HOST } from "../providers";
 import axios from "axios";
 import { useStore } from "vuex";
 import { useRoute } from "vue-router";
-import { ref, onMounted, computed, watch } from "vue";
+import { ref, onMounted, computed, watch, onUpdated } from "vue";
 import sliderMainComponent from "../components/slider-main-component.vue";
 let url = HOST;
 let store = useStore();
@@ -63,30 +41,59 @@ let productsArr = computed(() => store.state.module1.productsArr);
 let type = computed(() => store.state.module1.categoriesType);
 let parentId = computed(() => store.state.module1.categoriesParentId);
 let Title = computed(() => store.state.module1.categoriesTitle);
+
+watch(
+  () => type.value,
+  () => {
+    // console.log(type.value, parentId.value);
+    productCategories(type.value, parentId.value);
+    if (requestAnswer.value.length) {
+      FilterCategores(requestAnswer.value);
+    }
+  }
+);
 onMounted(() => {
   productCategories(type.value, parentId.value);
 });
 watch(
+  () => parentId.value,
+  () => {
+    // console.log(type.value, parentId.value);
+    productCategories(type.value, parentId.value);
+    if (requestAnswer.value.length) {
+      FilterCategores(requestAnswer.value);
+    }
+  }
+);
+watch(
   () => Title.value,
   (title) => {
+    // console.log(type.value, parentId.value);
     productCategories(type.value, parentId.value);
-    FilterCategores(requestAnswer.value);
+    if (requestAnswer.value.length) {
+      FilterCategores(requestAnswer.value);
+    }
   }
 );
 
 async function productCategories(type, parentId) {
+  console.log(1234);
   const response = await axios.get(
     url + `/api/app/products/sub-category-products/${parentId}/${type}`
   );
   requestAnswer.value = response.data.data.items;
 
   RequestEnd.value = 1;
+  FilterCategores(requestAnswer.value);
 }
 function foo(id) {
   store.commit("module1/chengeId", id);
 }
-function FilterCategores(arr) {
+function FilterCategores(arr, title) {
   arr.forEach((el) => {
+    if (title === el.category_title) {
+      productsArr.value = el.products;
+    }
     if (Title.value === el.category_title) {
       store.commit("module1/changeProductsArr", el.products);
     }
@@ -103,30 +110,18 @@ function FilterCategores(arr) {
 .product-title {
   font-size: 25px;
 }
-.product-price {
-  font-size: 27px;
-}
-.product-image {
-  width: 100%;
-  height: 80%;
-  object-fit: contain;
-}
+
 .items {
   width: 30%;
   height: 522px;
   margin: 200px 37px 0px 0px;
 }
-.item {
-  margin: 20px 40px 200px 0px;
-}
+
 @media all and (max-width: 450px) {
   .items {
     width: 42%;
     margin: 100px 20px 0px 0px;
     height: 350px;
-  }
-  .product-image {
-    height: 233px;
   }
 }
 </style>
