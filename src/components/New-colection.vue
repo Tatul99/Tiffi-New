@@ -7,14 +7,16 @@
             <div class="title col-12" v-if="obj.text">
               {{ obj.text ? obj.text : "" }}
             </div>
-            <div class="row seeMoreDiv">
-              <div class="seeMore q-pr-md">Увидеть Больше</div>
-              <img
-                src="../../public/forMan/left-vector.svg"
-                class="cursor-pointer seeMoreIcon"
-                alt=""
-              />
-            </div>
+            <router-link to="/New">
+              <div @click="chengeMenuActiveItem()" class="row seeMoreDiv">
+                <div class="seeMore q-pr-md">Увидеть Больше</div>
+                <img
+                  src="../../public/forMan/left-vector.svg"
+                  class="cursor-pointer seeMoreIcon"
+                  alt=""
+                />
+              </div>
+            </router-link>
           </div>
         </div>
       </div>
@@ -44,6 +46,7 @@
           </template>
 
           <vueper-slide
+            style="height: 100%"
             v-for="(i, index) in arr"
             :key="i.id"
             class="items"
@@ -53,24 +56,27 @@
             :title="i.price.toString()"
             disable
             :image="url + '/' + i.image"
+            @click="foo(i.id, i.type)"
           >
             <template v-slot:content>
-              <div
-                class="vueperslide__content-wrapper"
-                style="flex-direction: row"
-              >
-                <span class="text">{{
-                  i.info.length < 50 ? i.info : i.info.slice(0, 42) + "..."
-                }}</span>
-                <span class="image-title">{{ i.title }}</span>
-                <span class="prise">{{ i.price }}$</span>
-                <img
-                  v-if="index <= 1"
-                  class="btn"
-                  :src="url + '/' + i.image"
-                  alt=""
-                />
-              </div>
+              <router-link :to="'/cloaths-info/' + i.id">
+                <div
+                  class="vueperslide__content-wrapper"
+                  style="flex-direction: row"
+                >
+                  <span class="text">{{
+                    i.info.length < 50 ? i.info : i.info.slice(0, 42) + "..."
+                  }}</span>
+                  <span class="image-title">{{ i.title }}</span>
+                  <span class="prise">{{ i.price }}$</span>
+                  <img
+                    v-if="index <= 1"
+                    class="btn"
+                    :src="url + '/' + i.image"
+                    alt=""
+                  />
+                </div>
+              </router-link>
             </template>
           </vueper-slide>
         </vueper-slides>
@@ -85,11 +91,17 @@ import axios from "axios";
 import { ref } from "vue";
 import { HOST } from "../providers";
 import { onMounted, onUnmounted } from "@vue/runtime-core";
+import { useStore } from "vuex";
+let store = useStore();
+let Productid = ref(1);
 const props = defineProps({
   obj: Object,
   arr: Array,
 });
-
+function foo(id, type) {
+  console.log(id);
+  store.commit("module1/chengeId", [id, type]);
+}
 let teqvoxSlide = ref(3);
 let url = HOST;
 let arr = props.arr;
@@ -116,6 +128,9 @@ function getDimensions() {
   if (window.innerWidth < 455 && arr.length > 9) teqvoxSlide = 3.9;
 
   if (window.innerWidth < 455 && arr.length <= 9) teqvoxSlide = 3.5;
+}
+function chengeMenuActiveItem() {
+  store.commit("module1/chengeActiveMenu", 3);
 }
 </script>
 

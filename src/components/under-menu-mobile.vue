@@ -177,7 +177,6 @@ function closeMenu() {
   }
 }
 function chengCategoriesPageType(type, id, title) {
-  console.log(type);
   store.commit("module1/chengCategoriesPageType", [type, id, title]);
 }
 function getType() {

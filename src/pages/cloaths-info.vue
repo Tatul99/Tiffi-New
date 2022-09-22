@@ -56,14 +56,14 @@
   />
 </template>
 <script setup>
-import { ref, onMounted } from "vue";
+import { ref, onMounted, computed, watch } from "vue";
 import { useStore } from "vuex";
 import axios from "axios";
 import { HOST } from "../providers";
 import CloathsInfoComponent from "../components/cloaths-info-component.vue";
 import ImagePopap from "../components/image-popup.vue";
 let store = useStore();
-let id = ref(store.state.module1.id);
+let id = computed(() => store.state.module1.id);
 let url = HOST;
 let images = ref([]);
 let slide = ref(1);
@@ -71,9 +71,15 @@ let clothsInfoArr = ref([]);
 let chengeImagePage = ref(false);
 
 onMounted(() => {
+  console.log(computed(() => store.state.module1.id).value);
   DresInfoRequest();
 });
-
+watch(
+  () => id.value,
+  () => {
+    DresInfoRequest();
+  }
+);
 function chegeBool() {
   chengeImagePage.value = false;
 }

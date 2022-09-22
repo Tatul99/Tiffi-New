@@ -10,7 +10,7 @@
     >
       <router-link :to="'/cloaths-info/' + img.id">
         <q-img
-          @click="foo(img.id, type)"
+          @click="foo(img.id, img.type ? img.type : type)"
           class="rounded-borders col-1 col-md-2 row images items-end"
           :src="url + '/' + img.image"
         >
@@ -37,6 +37,7 @@ const props = defineProps({
   type: String,
 });
 function foo(id, type) {
+  console.log(type);
   store.commit("module1/chengeId", [id, type]);
 }
 </script>

@@ -14,7 +14,9 @@ body {
 .search-input .q-field__append {
   height: 34px;
 }
-
+.vueperslides--touchable {
+  height: 100% !important;
+}
 .q-carousel {
   height: unset !important;
 }
@@ -113,6 +115,7 @@ body {
 .vueperslides__track-inner {
   height: 400px !important;
 }
+
 .vueperslide__title {
   position: absolute;
   bottom: -20px;
