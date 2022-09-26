@@ -13,7 +13,7 @@
           >
             <router-link :to="'/cloaths-info/' + item.id">
               <img
-                @click="foo(item.id)"
+                @click="foo(item.id, item.type)"
                 class="col-12 product-image"
                 :src="url + '/' + item.image"
                 alt="products image"
@@ -40,8 +40,8 @@ const props = defineProps({
 import { useStore } from "vuex";
 let store = useStore();
 
-function foo(id) {
-  store.commit("module1/chengeId", id);
+function foo(id, type) {
+  store.commit("module1/chengeId", [id, type]);
 }
 </script>
 

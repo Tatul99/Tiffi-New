@@ -71,7 +71,6 @@ let clothsInfoArr = ref([]);
 let chengeImagePage = ref(false);
 
 onMounted(() => {
-  console.log(computed(() => store.state.module1.id).value);
   DresInfoRequest();
 });
 watch(
@@ -105,7 +104,6 @@ async function DresInfoRequest() {
   width: 405px;
   height: 410px;
   margin: 12px 0px 12px;
-  /* margin-left: 12px; */
 }
 .image-left {
   padding-left: 13px;

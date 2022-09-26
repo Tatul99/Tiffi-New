@@ -99,7 +99,6 @@ const props = defineProps({
   arr: Array,
 });
 function foo(id, type) {
-  console.log(id);
   store.commit("module1/chengeId", [id, type]);
 }
 let teqvoxSlide = ref(3);
@@ -139,10 +138,8 @@ function chengeMenuActiveItem() {
   margin-top: 200px;
 }
 .items {
-  /* height: 300px !important; */
   width: 372px;
   height: 468px;
-  /* margin: 2% 1.6%; */
 }
 .content {
   margin-bottom: 200px;
@@ -157,7 +154,6 @@ function chengeMenuActiveItem() {
 .active-slide {
   width: 634px !important;
   height: 583px !important;
-  /* border: 5px solid red; */
 }
 .prise {
   display: none;
@@ -198,12 +194,6 @@ function chengeMenuActiveItem() {
   height: 66px;
   display: none;
 }
-/* // .active-slide .text {
-//   display: block;
-// }
-// .active-slide .btn {
-//   display: block;
-// } */
 
 .first_slide_item {
   width: 100px !important;
@@ -244,10 +234,8 @@ function chengeMenuActiveItem() {
 
 @media all and (max-width: 1025px) {
   .items {
-    /* //   height: 300px !important; */
     width: 330px;
     height: 468px;
-    /* // margin: 2% 1.6%; */
   }
   .sliderarancmargin {
     margin: 0;
@@ -277,9 +265,7 @@ function chengeMenuActiveItem() {
     font-size: 12px;
     bottom: -100px;
   }
-  /* // .sliderarancmargin {
-  //   height: 500px;
-  // } */
+
   .content1 {
     height: 500px !important;
   }

@@ -45,7 +45,6 @@ let Title = computed(() => store.state.module1.categoriesTitle);
 watch(
   () => type.value,
   () => {
-    // console.log(type.value, parentId.value);
     productCategories(type.value, parentId.value);
     if (requestAnswer.value.length) {
       FilterCategores(requestAnswer.value);
@@ -58,7 +57,6 @@ onMounted(() => {
 watch(
   () => parentId.value,
   () => {
-    // console.log(type.value, parentId.value);
     productCategories(type.value, parentId.value);
     if (requestAnswer.value.length) {
       FilterCategores(requestAnswer.value);
@@ -68,7 +66,6 @@ watch(
 watch(
   () => Title.value,
   (title) => {
-    // console.log(type.value, parentId.value);
     productCategories(type.value, parentId.value);
     if (requestAnswer.value.length) {
       FilterCategores(requestAnswer.value);
@@ -77,7 +74,6 @@ watch(
 );
 
 async function productCategories(type, parentId) {
-  console.log(1234);
   const response = await axios.get(
     url + `/api/app/products/sub-category-products/${parentId}/${type}`
   );

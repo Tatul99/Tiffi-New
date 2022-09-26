@@ -37,7 +37,6 @@ const props = defineProps({
   type: String,
 });
 function foo(id, type) {
-  console.log(type);
   store.commit("module1/chengeId", [id, type]);
 }
 </script>
@@ -72,11 +71,6 @@ function foo(id, type) {
   font-weight: 100;
 }
 @media all and (max-width: 1024px) {
-  /* .line-div2 {
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-end;
-  } */
   .prise {
     font-size: 25px;
   }

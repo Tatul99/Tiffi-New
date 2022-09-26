@@ -30,7 +30,12 @@
                 <div class="col-12">
                   <div class="row justify-center">
                     <router-link to="/"
-                      ><q-btn class="q-mt-md" unelevated rounded color="black"
+                      ><q-btn
+                        @click="chengeActiveItem()"
+                        class="q-mt-md"
+                        unelevated
+                        rounded
+                        color="black"
                         ><p>Вернуться домой</p></q-btn
                       ></router-link
                     >
@@ -71,6 +76,9 @@ async function SearchProductRequest(name) {
 
   SearchProductsArr.value = response.data.data.items;
   openPage.value = 1;
+}
+function chengeActiveItem() {
+  store.commit("module1/chengeActiveMenu", 0);
 }
 </script>
 

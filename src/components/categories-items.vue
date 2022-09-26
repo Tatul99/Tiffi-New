@@ -6,7 +6,7 @@
           <div class="item col-3" v-for="item in productsArr" :key="item.id">
             <router-link :to="'/cloaths-info/' + item.id">
               <img
-                @click="foo(item.id)"
+                @click="foo(item.id, type)"
                 class="col-12 product-image"
                 :src="url + '/' + item.image"
                 alt="products image"
@@ -25,9 +25,16 @@
 <script setup>
 import { HOST } from "../providers";
 let url = HOST;
+import { useStore } from "vuex";
+import { computed } from "@vue/runtime-core";
+let store = useStore();
+let type = computed(() => store.state.module1.categoriesType);
 const props = defineProps({
   productsArr: Array,
 });
+function foo(id, type) {
+  store.commit("module1/chengeId", [id, type]);
+}
 </script>
 
 <style scoped>

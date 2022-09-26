@@ -223,7 +223,6 @@ function ChangeresponsiveMenuiBool(i, item) {
 .active {
   font-size: 22px;
   font-weight: 900;
-  /* position: relative; */
 }
 .items {
   display: flex;

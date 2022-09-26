@@ -315,12 +315,10 @@ a {
 .active {
   font-size: 22px;
   font-weight: 900;
-  /* position: relative; */
 }
 .logo-mec1 {
   width: 192px;
   height: 46px;
-  /* margin-top: 85px; */
 }
 .icons {
   display: none;

@@ -82,7 +82,7 @@ function change(i, id, children) {
 <style scoped>
 .main-div {
   margin-left: 135px;
-  /* width: 300px; */
+
   max-height: 400px;
   overflow: auto;
 }

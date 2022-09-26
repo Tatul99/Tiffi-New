@@ -96,7 +96,7 @@ import { ref } from "vue";
 import { HOST } from "../providers";
 let url = HOST;
 let count = ref(0);
-// let slide = ref(1);
+
 let chaps = ref(100);
 let width = ref(70);
 

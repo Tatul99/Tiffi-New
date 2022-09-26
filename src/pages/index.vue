@@ -74,7 +74,6 @@ async function zaprosforNewColection() {
   const response = await axios.get(url + "/api/app/news/home");
 
   NewColectionArr.value = response.data.data.items;
-  console.log(NewColectionArr.value);
 }
 </script>
 

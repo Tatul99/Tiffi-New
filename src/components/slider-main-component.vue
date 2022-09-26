@@ -192,10 +192,7 @@ function chengCategoriesPageType(type, id, title, subCategory) {
   font-size: 25px;
   text-decoration: none;
 }
-/* .images {
-  width: 30%;
-  height: 30%;
-} */
+
 @media all and (max-width: 1024px) {
   .slider-div {
     justify-content: center;
