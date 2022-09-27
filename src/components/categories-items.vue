@@ -50,6 +50,7 @@ function foo(id, type) {
 }
 @media all and (max-width: 450px) {
   .product-image {
+    width: 120%;
     height: 233px;
   }
 }

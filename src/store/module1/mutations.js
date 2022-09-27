@@ -7,7 +7,6 @@ export function chengeActiveMenu(state, payload) {
   state.activeMenuItem = payload;
 }
 export function chengeMenuType(state, payload) {
-  console.log(payload);
   state.categoriesId = 1;
   state.type = payload;
 }

@@ -12,10 +12,8 @@
                     class="items row justify-between"
                     v-for="(item, i) in menuItems"
                     :key="item.id"
-                    @click="
-                      chengeInfo(item.id, i),
-                        chengCategoriesPageType(item.id, item.title)
-                    "
+                    @mouseover="chengeInfo(item.id, i)"
+                    @click="chengCategoriesPageType(item.id, item.title)"
                     :class="i === active ? 'active' : ''"
                   >
                     <div>{{ item.title }}</div>

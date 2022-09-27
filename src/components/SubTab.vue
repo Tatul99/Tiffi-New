@@ -3,10 +3,8 @@
     <router-link to="/categories-page">
       <div
         v-for="(item, i) in arr"
-        @click="
-          change(i, item.id, item.children),
-            chengCategoriesPageType(categoriesId, item.title)
-        "
+        @mouseover="change(i, item.id, item.children)"
+        @click="chengCategoriesPageType(categoriesId, item.title)"
         :key="item.id"
         class="title"
       >
@@ -36,7 +34,14 @@ let active = ref(0);
 let categoriesId = computed(() => store.state.module1.categoriesId);
 let type = computed(() => store.state.module1.type);
 let active2 = computed(() => store.state.module2.active);
+let ParentId = computed(() => store.state.module1.categoriesId);
 
+watch(
+  () => ParentId.value,
+  () => {
+    BrendsArr.value = [];
+  }
+);
 watch(
   () => categoriesId.value,
   (categoriesId) => {

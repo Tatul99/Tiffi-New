@@ -95,12 +95,12 @@
           ></q-dialog>
 
           <div class="col-8 menu-line">
-            <div class="menu row justify-around">
+            <div class="menu row justify-end">
               <div
                 class="items cursor-pointer text-weight-bold"
                 v-for="(item, i) in menuTitles"
                 :key="item"
-                :class="i > 0 && i < menuTitles.length - 1 ? 'items2' : ''"
+                :class="item.type ? 'items2' : ''"
               >
                 <router-link :to="item.path">
                   <div
@@ -244,13 +244,11 @@ let menuTitles = [
     id: 4,
     name: "Новинки",
     path: "/New",
-    // type: "for_women",
   },
   {
     id: 5,
     name: "Скидки",
     path: "/Discounts",
-    // type: "for_men",
   },
   {
     id: 6,
@@ -305,6 +303,7 @@ a {
 .items {
   font-size: 20px;
   font-weight: 300;
+  margin-left: 40px;
 }
 .hidden-menu {
   display: none;
@@ -359,6 +358,9 @@ a {
 }
 
 @media all and (max-width: 1025px) {
+  .items {
+    margin: 0;
+  }
   .responsUnderMenu {
     max-height: 100% !important;
     background: unset;
